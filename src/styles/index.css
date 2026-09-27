@@ -11,6 +11,12 @@
 }
 
 
+@layer base {
+  body {
+    @apply bg-neutral-900 bg-[url(noise.webp)] h-300
+  }
+}
+
 
 @layer components {
   .flex-center {

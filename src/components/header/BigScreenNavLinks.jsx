@@ -33,7 +33,7 @@ export const BigScreenNavLinks = () => {
 
   return (
     <div className="hidden lg:flex flex-3">
-      <nav className="font-geist-mono uppercase flex-center flex-2 text-[#e7e7e7] gap-13 tracking-widest text-[19px]">
+      <nav className="font-geist-mono uppercase flex-center flex-2 text-[#e7e7e7] gap-13 tracking-widest text-[19px] h-13">
         {navbar.map(item => (
           <NavLink key={item.id} to={item.to} ref={item.ref}
             onMouseOver={() => handleHover(item.ref, item.originalText)}
@@ -43,13 +43,15 @@ export const BigScreenNavLinks = () => {
         ))}
       </nav>
 
-      <div className="flex-center font-geist-mono uppercase tracking-widest flex-1 text-[#e7e7e7] lg:justify-end">
-        <BiUser size={20} className=""/>
-        <Link 
-          ref={login} 
-          onMouseOver={() => handleHover(login, 'LOGIN')} 
-          onMouseOut={() => handleHover(login, 'LOGIN')}
-        >LOGIN</Link>
+      <div className="flex-center font-geist-mono uppercase tracking-widest flex-1 text-[#e7e7e7] lg:justify-end pr-5">
+        <div className="flex-center">
+          <BiUser size={20} className="mr-2"/>
+          <Link 
+            ref={login} 
+            onMouseOver={() => handleHover(login, 'LOGIN')} 
+            onMouseOut={() => handleHover(login, 'LOGIN')}
+          >LOGIN</Link>
+        </div>
       </div>
     </div>
   )

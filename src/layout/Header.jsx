@@ -1,16 +1,49 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router"
 import { CgMenuRight } from "react-icons/cg";
 import { MobileMenu } from "../components/header/MobileMenu";
 import { BigScreenNavLinks } from "../components/header/BigScreenNavLinks"
 
+
 export const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const headRef = useRef(null)
+  const lastScrollposRef = useRef(null)
+  const [scroll, setScroll] = useState(false);
+  
+
+  const hideHeader = () => {
+    const isScrollbottom = lastScrollposRef.current < window.scrollY;
+    isScrollbottom 
+      ? headRef.current.style.transform = "translateY(-100%)"
+      : headRef.current.style.transform = "translateY(0)"
+    lastScrollposRef.current = window.scrollY;
+  };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 50) {
+        setScroll(true);
+        hideHeader();
+      } else {
+        setScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
     
   return (
-    <header className="bg-neutral-800/90 w-full bg-[url(noise.webp)] py-4 md:py-5 flex justify-between items-center px-3 md:px-6 ">
-      <div className="flex-1 lg:justify-start">
+    <header ref={headRef}  className={`fixed top-0 left-0 duration-700 transition-all  bg-neutral-800/60 w-full bg-[url(noise.webp)] py-4 md:py-5 lg:py-4 flex 
+    justify-between items-center px-3 ${scroll ? "py-4 bg-eerie-black-4" : "py-4  bg-transparent"}`}>
+
+      <div className="flex-1 lg:justify-start h-13 lg:pl-5 flex items-center">
         <Link to="/" className="font-geostar-fill text-[#e7e7e7] text-[26px] tracking-wider md:text-[35px]">Maze Movie</Link>
       </div>
 
