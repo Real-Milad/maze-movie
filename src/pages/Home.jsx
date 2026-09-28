@@ -1,11 +1,13 @@
 import { Hero } from "../components/home/Hero"
+// import { InfinitSlider } from "../components/home/InfinitSlider"
 
 export const Home = () => {
 
     
   return (
-    <div>
+    <div className="">
       <Hero />
+      {/* <InfinitSlider /> */}
     </div>
   )
 }

@@ -13,7 +13,7 @@
 
 @layer base {
   body {
-    @apply bg-neutral-900 bg-[url(noise.webp)] h-300
+    @apply bg-[#000] bg-[url(noise.webp)] mt-20 max-w-470 mx-auto
   }
 }
 
@@ -23,3 +23,15 @@
     @apply flex items-center justify-center
   }
 }
+
+
+/*----------------- Slider_2 ------------------*/
+.cont:hover ul { animation-play-state: paused }
+@keyframes scroll {
+  to {transform: translateX(calc(-100% - 16px))}
+}
+
+@keyframes scrollbig {
+  to {transform: translateX(calc(-100% - 40px))}
+}
+/* ------------------------------------------- */

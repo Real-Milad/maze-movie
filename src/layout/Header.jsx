@@ -40,8 +40,8 @@ export const Header = () => {
 
     
   return (
-    <header ref={headRef}  className={`fixed top-0 left-0 duration-700 transition-all  bg-neutral-800/60 w-full bg-[url(noise.webp)] py-4 md:py-5 lg:py-4 flex 
-    justify-between items-center px-3 ${scroll ? "py-4 bg-eerie-black-4" : "py-4  bg-transparent"}`}>
+    <header ref={headRef}  className={`fixed top-0 left-0 right-0 mx-auto duration-700 transition-all w-full  py-4 md:py-5 lg:py-4 flex max-w-480 z-50
+    justify-between items-center px-3 ${scroll ? "py-4 bg-neutral-600" : "py-4  bg-transparent"}`}>
 
       <div className="flex-1 lg:justify-start h-13 lg:pl-5 flex items-center">
         <Link to="/" className="font-geostar-fill text-[#e7e7e7] text-[26px] tracking-wider md:text-[35px]">Maze Movie</Link>
@@ -49,9 +49,9 @@ export const Header = () => {
 
       <BigScreenNavLinks />
 
-      <CgMenuRight onClick={() => setToggleMenu(true)} className=" text-[#e7e7e7] text-[33px] md:text-[40px] lg:hidden " />
+      <CgMenuRight onClick={() => setToggleMenu(true)} className="text-[#e7e7e7] text-[33px] md:text-[40px] xl:hidden"/>
 
-      <MobileMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu}  />
+      <MobileMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
 
     </header>
   )

@@ -32,7 +32,7 @@ export const BigScreenNavLinks = () => {
   }
 
   return (
-    <div className="hidden lg:flex flex-3">
+    <div className="hidden xl:flex flex-3">
       <nav className="font-geist-mono uppercase flex-center flex-2 text-[#e7e7e7] gap-13 tracking-widest text-[19px] h-13">
         {navbar.map(item => (
           <NavLink key={item.id} to={item.to} ref={item.ref}
