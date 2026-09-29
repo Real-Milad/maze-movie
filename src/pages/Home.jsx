@@ -1,5 +1,5 @@
 import { Hero } from "../components/home/Hero"
-// import { InfinitSlider } from "../components/home/InfinitSlider"
+import { InfinitSlider } from "../components/home/InfinitSlider"
 
 export const Home = () => {
 
@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <div className="">
       <Hero />
-      {/* <InfinitSlider /> */}
+      <InfinitSlider />
     </div>
   )
 }
