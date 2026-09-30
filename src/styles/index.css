@@ -15,10 +15,13 @@
   --font-kavoon: "Kavoon";
 }
 
+.sliderphone{
+  height: calc(100dvh - 84px)
+}
 
 @layer base {
   body {
-    @apply bg-black bg-[url(noise.webp)] mt-20 max-w-470 mx-auto
+    @apply bg-black bg-[url(noise.webp)]  xl:mt-20 max-w-470 mx-auto h-300
   }
 }
 
@@ -28,6 +31,25 @@
     @apply flex items-center justify-center
   }
 }
+
+body.preloading, body.menu-open { @apply overflow-hidden }
+
+.slider-reveal { @apply opacity-0 }
+  .slider-item.active .slider-reveal { animation: sliderReveal 1s ease forwards }
+  .slider-item.active .section-subtitle { animation-delay: 500ms }
+  .slider-item.active .hero-title { animation-delay: 1000ms }
+  .slider-item.active .hero-text { animation-delay: 1500ms }
+  .slider-item.active .btn { animation-delay: 2000ms }
+  @keyframes sliderReveal {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
 
 /*----------------- Slider_2 ------------------*/

@@ -19,11 +19,11 @@ export const Hero = () => {
     }, 10000);
 
     return () => clearInterval(timer);
-  }, [data]);
+  }, [data, activeIndex]);
 
 
   return (
-    <div className="flex w-full h-200 gap-3 overflow-hidden px-10 pt-14 max-w-470 mx-auto">
+    <div className="w-full h-190 2xl:h-200 gap-3 overflow-hidden px-10 pt-8 max-w-470 mx-auto hidden xl:flex">
       {data?.slice(0, 6).map((slide, index) => {
         const isActive = index === activeIndex;
 
@@ -40,7 +40,7 @@ export const Hero = () => {
             <img src={`${IMAGE_URL}${slide.poster_path}`} alt={slide.title} className={`${isActive ? "opacity-100" : "opacity-0"} w-40 object-cover absolute left-3 border-2 rounded-[7px] transition-all border-neutral-300/50 duration-900 top-3`}/>
 
             {/* verticall title movie */}
-            <div className={`absolute left-6 bottom-6 flex-center bg-white/10 backdrop-blur-md shadow-lg p-4 rounded-lg text-[26px] w-max [writing-mode:sideways-lr] text-white/60 tracking-widest font-kavoon bg-[url(noise.webp)] ${isActive ? "opacity-0 duration-75" : "opacity-100 duration-700"}`}>
+            <div className={`absolute 2xl:left-6 xl:left-3 bottom-6 flex-center bg-white/10 backdrop-blur-md shadow-lg p-4 rounded-lg text-[26px] w-max [writing-mode:sideways-lr] text-white/60 tracking-widest font-kavoon bg-[url(noise.webp)] ${isActive ? "opacity-0 duration-75" : "opacity-100 duration-700"}`}>
               <p>{slide.title}</p>
             </div>
 

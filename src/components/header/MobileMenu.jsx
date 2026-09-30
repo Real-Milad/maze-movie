@@ -35,8 +35,8 @@ export const MobileMenu = ({ toggleMenu, setToggleMenu }) => {
 
   return (
     <div 
-      className={`fixed inset-0 flex items-center pt-30 flex-col bg-neutral-900 bg-[url(noise.webp)] z-10
-      transition-all duration-500 ${toggleMenu ? "translate-x-0" : "-translate-x-full"}`}
+      className={`fixed inset-0 flex items-center pt-30 flex-col bg-neutral-900 bg-[url(noise.webp)] z-50
+      transition-transform duration-500 ${toggleMenu ? "translate-x-0" : "-translate-x-full"}`}
     >
       <CgClose size={40} onClick={() => setToggleMenu(false)} className="absolute top-7 right-7"/>
         <Link to="/" className="text-[34px] text-white/90 font-geostar-fill mb-25 tracking-widest md:text-[40px]">Maze Movie</Link>
