@@ -1,12 +1,12 @@
 import { Hero } from "../components/home/Hero"
-import { HeroSmallScreen } from "../components/home/HeroSmallScreen"
 import { InfinitSlider } from "../components/home/InfinitSlider"
+import { HeroSmallScreen } from "../components/home/HeroSmallScreen"
 
 export const Home = () => {
 
     
   return (
-    <div className="">
+    <div>
       <Hero />
       <HeroSmallScreen />
       <InfinitSlider />

@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import { querySliderOption } from "../../api/querySliders"
 import { useEffect, useState } from "react";
+import { PiStarFill } from "react-icons/pi";
+import { FaLanguage } from "react-icons/fa6";
+import { useNavigate } from "react-router";
+import { MdDateRange } from "react-icons/md";
+
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/original";
 
@@ -10,6 +15,9 @@ const IMAGE_URL = "https://image.tmdb.org/t/p/original";
 export const HeroSmallScreen = () => {
   const { data: slides } = useQuery(querySliderOption())
   const [index, setIndex] = useState(0);
+
+
+  const navigate = useNavigate()
 
 
 
@@ -22,7 +30,7 @@ export const HeroSmallScreen = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(next, 8000);
+    const interval = setInterval(next, 10000);
     return () => clearInterval(interval);
   }, [index]);
 
@@ -44,22 +52,34 @@ export const HeroSmallScreen = () => {
               <img src={`${IMAGE_URL}${slide.backdrop_path}`} alt={slide.title} key={i} width={1880} height={950} className="w-full h-full object-cover"/>
             </div>
 
-            <p className="slider-reveal text-[12px] relative font-bold tracking-[5px] mx-auto uppercase text-gold-crayola mb-4 
-              md:text-[18px] lg:text-[15px] lg:mt-50 ">
-              test
-            </p>
+            <div className="absolute slider-reveal count bottom-1 left-1 right-1 p-2 flex h-40 bg-white/10 backdrop-blur-md shadow-2xs rounded-[7px] bg-[url(noise.webp)]  text-neutral-300 font-roboto-slab">
 
-            <img src={`${IMAGE_URL}${slide.poster_path}`} alt={slide.title} className={`slider-reveal w-30 object-cover absolute left-3 border-2 rounded-[7px] transition-all border-neutral-300/50 duration-900 bottom-5`}/>
+              <img src={`${IMAGE_URL}${slide.poster_path}`} alt={slide.title} className={`slider-reveal hero-banner object-cover border-2 rounded-[7px] transition-all border-neutral-300/50 duration-900`}/>
 
-            <h1 className="hero-title slider-reveal text-neutral-300 text-[50px] leading-25 tracking-[5px] font-Story mb-20 
-              md:text-[75px] md:leading-35 md:mb-20 lg:text-[120px] lg:tracking-[9px] lg:leading-60 lg:mb-25">
-              test
-            </h1>
-            
-            <p className="hero-text text-gold-crayola/80 slider-reveal font-primary tracking-wider mb-10 text-[15px]
-              md:text-[20px] md:mb-20 lg:text-[22px] w-110 md:w-150 lg:w-300 mx-auto">
-              Come with family & feel the joy of mouthwatering food
-            </p>
+              <div className="flex flex-col items-start ml-4 gap-7 w-full">
+                <p className="slider-reveal hero-title text-[19px] tracking-widest relative">
+                  {slide.title}
+                </p>
+
+                <div className="flex justify-between items-center w-full ">
+                  <div className="flex flex-col items-start gap-4">
+                    <p className="flex justify-center items-center gap-2 slider-reveal hero-date text-[12px] relative tracking-[5px]">
+                      <MdDateRange />{slide.release_date.split("-")[0]}
+                    </p>
+
+                    <p className="flex justify-center items-center gap-2 hero-title hero-lang slider-reveal text-[12px] tracking-[5px]">
+                      <FaLanguage />{slide.original_language.toUpperCase()}
+                    </p>
+                    
+                    <p className="flex justify-center items-center gap-2 hero-text hero-vote  slider-reveal tracking-wider text-[12px]">
+                      <PiStarFill />{slide.vote_average.toFixed(1)}
+                    </p>
+                  </div>
+                  <button className="absolute right-2 bottom-2 bg-black py-2 px-3 rounded-[5px]" onClick={() => navigate(`/movies/${slide.id}`)}>More Info</button>
+                </div>
+
+              </div>
+            </div>
           
           </div>
         )

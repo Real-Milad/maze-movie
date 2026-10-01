@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
 @custom-variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";;
-
 
 
 @theme {
@@ -15,13 +14,15 @@
   --font-kavoon: "Kavoon";
 }
 
-.sliderphone{
-  height: calc(100dvh - 84px)
-}
 
 @layer base {
   body {
     @apply bg-black bg-[url(noise.webp)]  xl:mt-20 max-w-470 mx-auto h-300
+  }
+
+  body.preloading, 
+  body.menu-open { 
+    @apply overflow-hidden 
   }
 }
 
@@ -30,35 +31,66 @@
   .flex-center {
     @apply flex items-center justify-center
   }
-}
 
-body.preloading, body.menu-open { @apply overflow-hidden }
-
-.slider-reveal { @apply opacity-0 }
-  .slider-item.active .slider-reveal { animation: sliderReveal 1s ease forwards }
-  .slider-item.active .section-subtitle { animation-delay: 500ms }
-  .slider-item.active .hero-title { animation-delay: 1000ms }
-  .slider-item.active .hero-text { animation-delay: 1500ms }
-  .slider-item.active .btn { animation-delay: 2000ms }
-  @keyframes sliderReveal {
-    0% {
-      transform: translateY(30px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  .slider-reveal { 
+    @apply opacity-0 
   }
 
+  .slider-item.active .slider-reveal { 
+    animation: sliderReveal 1s ease forwards 
+  }
 
-/*----------------- Slider_2 ------------------*/
-.cont:hover ul { animation-play-state: paused }
+  .slider-item.active .count { 
+    animation-delay: 500ms 
+  }
+
+  .slider-item.active .hero-banner { 
+    animation-delay: 1000ms 
+  }
+
+  .slider-item.active .hero-title { 
+    animation-delay: 1500ms 
+  }
+
+  .slider-item.active .hero-date { 
+    animation-delay: 2000ms 
+  }
+
+  .slider-item.active .hero-lang { 
+    animation-delay: 2500ms 
+  }
+
+  .slider-item.active .hero-vote { 
+    animation-delay: 3000ms 
+  }
+
+  .cont:hover ul { 
+    animation-play-state: paused 
+  }
+}
+
+
+
+
+@keyframes sliderReveal {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes scroll {
-  to {transform: translateX(calc(-100% - 16px))}
+  to {
+    transform: translateX(calc(-100% - 16px))
+  }
 }
 
 @keyframes scrollbig {
-  to {transform: translateX(calc(-100% - 40px))}
+  to {
+    transform: translateX(calc(-100% - 40px))
+  }
 }
-/* ------------------------------------------- */
