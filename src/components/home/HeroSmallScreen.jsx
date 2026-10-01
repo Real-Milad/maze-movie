@@ -49,7 +49,7 @@ export const HeroSmallScreen = () => {
           `}>
 
             <div className="w-full h-full absolute top-0 left-0 -z-1 pointer-events-none"> 
-              <img src={`${IMAGE_URL}${slide.backdrop_path}`} alt={slide.title} key={i} width={1880} height={950} className="w-full h-full object-cover"/>
+              <img src={`${IMAGE_URL}${slide.backdrop_path}`} alt={slide.title} key={i} width={1880} height={950} className="w-full h-full object-cover mask-[linear-gradient(to_bottom,black_0%,black_30%,transparent_100%)]"/>
             </div>
 
             <div className="absolute slider-reveal count bottom-1 left-1 right-1 p-2 flex h-40 bg-white/10 backdrop-blur-md shadow-2xs rounded-[7px] bg-[url(noise.webp)]  text-neutral-300 font-roboto-slab">

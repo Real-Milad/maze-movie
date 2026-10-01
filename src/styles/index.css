@@ -64,9 +64,6 @@
     animation-delay: 3000ms 
   }
 
-  .cont:hover ul { 
-    animation-play-state: paused 
-  }
 }
 
 
@@ -93,4 +90,8 @@
   to {
     transform: translateX(calc(-100% - 40px))
   }
+}
+
+.cont:hover ul { 
+  animation-play-state: paused 
 }
