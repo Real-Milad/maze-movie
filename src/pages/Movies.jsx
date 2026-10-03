@@ -15,7 +15,7 @@ export const Movies = () => {
   const { data, isPending, isError } = useQuery(queryOptionMovies(page));
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0,0);
   }, [page]);
 
   if (isPending) return <p>Loading....</p>
@@ -24,7 +24,7 @@ export const Movies = () => {
 
   return (
     <>
-      <div className="mt-30 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mx-3 md:mx-20 xl:mx-30 relative">
+      <div className="mt-30 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 
           <MovieCard 
             key={movie.id}

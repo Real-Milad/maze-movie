@@ -10,7 +10,7 @@ export const MovieCard = ({ movie, isActive, onToggle }) => {
 
 
   return (
-    <div data-active={isActive} onClick={onToggle} className="w-full h-full relative group overflow-hidden rounded-[5px] z-5">
+    <div data-active={isActive} onClick={onToggle} className="w-full h-full relative group overflow-hidden rounded-[5px] z-5 shadow-lg shadow-neutral-900">
 
       
 

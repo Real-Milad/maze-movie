@@ -27,6 +27,8 @@ export const Header = () => {
         hideHeader();
       } else {
         setScroll(false);
+        headRef.current.style.transform = "translateY(0)";
+        lastScrollposRef.current = window.scrollY;
       }
     };
 
