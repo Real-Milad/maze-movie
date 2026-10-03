@@ -1,35 +1,41 @@
-import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query"
 import { queryOptionMovies } from "../api/queryMovies"
+import { MovieCard } from "../components/shared/MovieCard";
+import { useEffect, useState } from "react";
+import { Pagination } from "../components/shared/Pagination";
 
 
-const IMAGE_URL = "https://image.tmdb.org/t/p/original";
 
 
 export const Movies = () => {
-  const { data, isPending, isError } = useQuery(queryOptionMovies());
 
+  const totalPage = 10
+  const [page, setPage] = useState(1)
+  const [activeId, setActiveId] = useState(false);
+  const { data, isPending, isError } = useQuery(queryOptionMovies(page));
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
 
   if (isPending) return <p>Loading....</p>
+
   if (isError) return <p>Something was Wrong!</p>
 
   return (
-    <div className="mt-22 grid grid-cols-2 xl:grid-cols-7 p-2 mx-2 gap-7">
-      {data.results.map(movie => (
+    <>
+      <div className="mt-30 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mx-3 md:mx-20 xl:mx-30 relative">
+        {data.results.map(movie => 
+          <MovieCard 
+            key={movie.id}
+            movie={movie} 
+            isActive={activeId === movie.id}
+            onToggle={() => setActiveId(prev => (prev === movie.id ? null : movie.id))}
+          />
+        )}
+      </div>
 
-        <div key={movie.id} className="card  w-50">
-
-          <div>
-            <img src={`${IMAGE_URL}${movie.poster_path}`} alt={movie.title} className={`w-full object-cover transition-all  duration-900`}/>
-          </div>
-
-          <div>
-            <p className="text-white text-center">{movie.title}</p>
-          </div>
-
-        </div>
-
-      ))}
-    </div>
+      <Pagination page={page} setPage={setPage} totalPage={totalPage} />
+    </>
   )
 }

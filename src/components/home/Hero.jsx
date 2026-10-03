@@ -41,7 +41,7 @@ export const Hero = () => {
 
             {/* verticall title movie */}
             <div className={`absolute 2xl:left-6 xl:left-3 bottom-6 flex-center bg-white/10 backdrop-blur-md shadow-2xs p-4 rounded-lg text-[26px] w-max [writing-mode:sideways-lr] text-white/60 tracking-widest font-kavoon bg-[url(noise.webp)] ${isActive ? "opacity-0 duration-75" : "opacity-100 duration-700"}`}>
-              <p>{slide.title}</p>
+              <p>{slide.title.split(":")[0]}</p>
             </div>
 
             {/* Movie details */}
@@ -54,7 +54,7 @@ export const Hero = () => {
 
                 <div className="left flex flex-col flex-1 gap-2">
                   <div className="flex items-center gap-5">
-                    <h2 className="text-[25px] font-bold font-roboto-slab tracking-wider text-neutral-300">{slide.title}</h2>
+                    <h2 className="text-[25px] font-bold font-roboto-slab tracking-wider text-neutral-300">{slide.title.split(":")[0]}</h2>
                     <p className="text-[25px] font-bold font-roboto-slab tracking-wider text-neutral-300">{slide.release_date.split("-")[0]}</p>
                   </div>
 
