@@ -17,7 +17,7 @@
 
 @layer base {
   body {
-    @apply bg-black bg-[url(noise.webp)]  xl:mt-20 max-w-470 mx-auto h-300
+    @apply bg-black bg-[url(noise.webp)] xl:mt-20 max-w-470 mx-auto
   }
 
   body.preloading, 
