@@ -30,11 +30,15 @@ export const Hero = () => {
         return (
           <div key={slide.id} onClick={() => setActiveIndex(index)}
             className={`relative cursor-pointer overflow-hidden
-            rounded-[15px] transition-all duration-1000 border-2 border-neutral-700
+            rounded-[15px] transition-all duration-1000 border-2 border-[#274741]
             ${isActive ? "flex-10" : "flex-1 "}`}
           >
             {/* cover Movie */}
-            <img src={`${IMAGE_URL}${slide.backdrop_path}`} alt={slide.title} className="w-full h-full object-cover mask-[linear-gradient(to_bottom,black_0%,black_30%,transparent_100%)]"/>
+            <img src={`${IMAGE_URL}${slide.backdrop_path}`} alt={slide.title} className="w-full h-full object-cover"/>
+
+            {isActive &&
+              <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-t from-black/80 via-black/30 to-transparent transition-all duration-800"/>
+            }
 
             {/* wallpaper movie */}
             <img src={`${IMAGE_URL}${slide.poster_path}`} alt={slide.title} className={`${isActive ? "opacity-100" : "opacity-0"} w-40 object-cover absolute left-3 border-2 rounded-[7px] transition-all border-neutral-300/50 duration-900 top-3`}/>

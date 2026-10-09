@@ -43,7 +43,7 @@ export const MobileMenu = ({ toggleMenu, setToggleMenu }) => {
           
         <nav className="font-geist-mono uppercase flex-center flex-col text-[#e7e7e7] gap-7 tracking-widest text-[19px]">
           {navbar.map(item => (
-            <NavLink key={item.id} to={item.to} ref={item.ref}
+            <NavLink key={item.id} to={item.to} ref={item.ref} onClick={() => setToggleMenu(false)}
               onMouseOver={() => handleHover(item.ref, item.originalText)}
               onMouseOut={() => handleHover(item.ref, item.originalText)}>
               {item.title}

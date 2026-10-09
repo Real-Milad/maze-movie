@@ -1,15 +1,12 @@
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query";
 import { queryOptionMovieDetails } from "../api/queryMovieDetails";
-import { FaImdb, FaLanguage } from "react-icons/fa6";
+import { FaImdb } from "react-icons/fa6";
 import { MdDateRange } from "react-icons/md";
 import { LiaLanguageSolid } from "react-icons/lia";
 
 
-
-
 const IMAGE_URL = "https://image.tmdb.org/t/p/original";
-
 
 export const MoviesDetails = () => {
   const { id } = useParams()
@@ -22,17 +19,17 @@ export const MoviesDetails = () => {
 
 
   return (
-    <div className="bg-neutral-100/10 w-full h-max mx-auto mt-26 relative">
+    <div className="w-full h-max mt-50 relative ">
 
       <img 
         src={`${IMAGE_URL}${data.backdrop_path}`} 
         alt={data.title} 
-        className="h-full w-full object-cover brightness-30 absolute inset-0"
+        className="h-full w-full object-cover brightness-50 absolute inset-0"
       />
 
       <div className="bg-white/10 backdrop-blur-sm p-5">
 
-        <div className="text-white/80 tracking-wider text-center font-roboto-slab py-1 text-4xl mb-12">
+        <div className="text-white/80 tracking-wider text-center font-roboto-slab py-9 text-4xl">
           <h1 className="text-shadow-lg text-shadow-black/70">{data.title}</h1>
         </div>
 
@@ -76,7 +73,7 @@ export const MoviesDetails = () => {
           <p>{data.overview}</p>
         </div>
 
-        <div className="flex justify-between font-roboto-slab">
+        <div className="flex justify-between font-roboto-slab mb-15">
           <a href={data.homepage} className="bg-white/80 px-5 py-1 hover:text-white/80 hover:bg-black/50 transition-all ">Original Page</a>
 
           <a href={`https://www.imdb.com/title/${data.imdb_id}`} className="bg-white/80 px-5 py-1 hover:text-white/80 hover:bg-black/50 transition-all ">IMDB Page</a>
