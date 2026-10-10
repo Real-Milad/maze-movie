@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { BiUser } from "react-icons/bi";
 import { Link, NavLink } from "react-router";
+import ThemeToggle from "../shared/ThemeToggle";
 
-export const BigScreenNavLinks = () => {
+export const BigScreenNavLinks = ({isDark, onChange}) => {
   const homeNav = useRef(null);
   const moviesNav = useRef(null);
   const seriesNav = useRef(null);
@@ -32,7 +33,7 @@ export const BigScreenNavLinks = () => {
   }
 
   return (
-    <div className="hidden xl:flex flex-3">
+    <div className="hidden xl:flex flex-3 items-center">
       <nav className="font-geist-mono uppercase flex-center flex-2 text-[#e7e7e7] gap-13 tracking-widest text-[19px] h-13">
         {navbar.map(item => (
           <NavLink key={item.id} to={item.to} ref={item.ref}
@@ -43,7 +44,7 @@ export const BigScreenNavLinks = () => {
         ))}
       </nav>
 
-      <div className="flex-center font-geist-mono uppercase tracking-widest flex-1 text-[#e7e7e7] lg:justify-end pr-5">
+      <div className="flex-center font-geist-mono uppercase tracking-widest flex-1 transition-colors duration-500 dark:text-[#e7e7e7] text-black lg:justify-end pr-5">
         <div className="flex-center">
           <BiUser size={20} className="mr-2"/>
           <Link 
@@ -51,6 +52,10 @@ export const BigScreenNavLinks = () => {
             onMouseOver={() => handleHover(login, 'LOGIN')} 
             onMouseOut={() => handleHover(login, 'LOGIN')}
           >LOGIN</Link>
+        </div>
+
+        <div className="pl-5 pt-2">
+          <ThemeToggle className={"size-15"} isDark={isDark} onChange={onChange} />
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { MobileMenu } from "../components/header/MobileMenu";
 import { BigScreenNavLinks } from "../components/header/BigScreenNavLinks"
 
 
-export const Header = () => {
+export const Header = ({isDark, onChange}) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const headRef = useRef(null)
   const lastScrollposRef = useRef(null)
@@ -46,14 +46,14 @@ export const Header = () => {
     
   return (
     <>
-      <header ref={headRef}  className={`fixed top-0 left-0 right-0 mx-auto duration-700 transition-all w-full  py-4 md:py-5 lg:py-4 flex max-w-480 z-50  bg-[url(noise.webp)] bg-[#12251f]
-      justify-between items-center px-3 `}>
+      <header ref={headRef}  className={`fixed top-0 left-0 right-0 mx-auto duration-700 transition-all w-full  py-2 md:py-5 lg:py-1 flex max-w-480 z-10 
+      justify-between items-center px-3 ${scroll ? "bg-[#131b19]" : "bg-transparent"}`}>
 
         <div className="flex-1 lg:justify-start h-13 lg:pl-5 flex items-center">
           <Link to="/" className="font-geostar-fill text-[#e7e7e7] text-[26px] tracking-wider md:text-[35px]">Maze Movie</Link>
         </div>
 
-        <BigScreenNavLinks />
+        <BigScreenNavLinks isDark={isDark} onChange={onChange} />
 
         <CgMenuRight onClick={() => setToggleMenu(true)} className="text-[#e7e7e7] text-[33px] md:text-[40px] xl:hidden"/>
 

@@ -23,7 +23,7 @@ export const Hero = () => {
 
 
   return (
-    <div className="w-full h-190 2xl:h-200 gap-3 overflow-hidden px-10 pt-8 max-w-470 mx-auto hidden xl:flex">
+    <div className="w-full h-[calc(100dvh-130px)] max-h-210 gap-3 overflow-hidden px-8 pt-8 max-w-470 mx-auto hidden xl:flex m-auto">
       {data?.slice(0, 6).map((slide, index) => {
         const isActive = index === activeIndex;
 
@@ -31,27 +31,23 @@ export const Hero = () => {
           <div key={slide.id} onClick={() => setActiveIndex(index)}
             className={`relative cursor-pointer overflow-hidden
             rounded-[15px] transition-all duration-1000 border-2 border-[#274741]
-            ${isActive ? "flex-10" : "flex-1 "}`}
+            ${isActive ? "w-[calc(100%-115px)]" : "w-42.5 md:w-45"}`}
           >
             {/* cover Movie */}
             <img src={`${IMAGE_URL}${slide.backdrop_path}`} alt={slide.title} className="w-full h-full object-cover"/>
-
-            {isActive &&
-              <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-t from-black/80 via-black/30 to-transparent transition-all duration-800"/>
-            }
 
             {/* wallpaper movie */}
             <img src={`${IMAGE_URL}${slide.poster_path}`} alt={slide.title} className={`${isActive ? "opacity-100" : "opacity-0"} w-40 object-cover absolute left-3 border-2 rounded-[7px] transition-all border-neutral-300/50 duration-900 top-3`}/>
 
             {/* verticall title movie */}
-            <div className={`absolute 2xl:left-6 xl:left-3 bottom-6 flex-center bg-white/10 backdrop-blur-md shadow-2xs p-4 rounded-lg text-[26px] w-max [writing-mode:sideways-lr] text-white/60 tracking-widest font-kavoon bg-[url(noise.webp)] ${isActive ? "opacity-0 duration-75" : "opacity-100 duration-700"}`}>
+            <div className={`absolute xl:left-5 md:left-2  bottom-6 flex-center bg-white/10 backdrop-blur-md shadow-2xs p-4 rounded-lg text-[26px] w-max [writing-mode:sideways-lr] text-white/60 tracking-widest font-kavoon bg-[url(noise.webp)] ${isActive ? "opacity-0 duration-75" : "opacity-100 duration-700"}`}>
               <p>{slide.title.split(":")[0]}</p>
             </div>
 
             {/* Movie details */}
             <div 
             className={`absolute flex h-36  inset-x-2 bottom-2 rounded-2xl text-white justify-between
-            transition-all p-3 z-10 bg-white/10 backdrop-blur-md shadow-lg gap-8 bg-[url(noise.webp)]
+            transition-all p-3 z-10 bg-black/70 backdrop-blur-md shadow-lg gap-8 bg-[url(noise.webp)]
             ${isActive ? "opacity-100 delay-800 duration-900" : "opacity-0 duration-100"}`}
             >
               <div className="flex justify-between w-full h-full overflow-hidden">
@@ -73,7 +69,7 @@ export const Hero = () => {
                 </div>
 
                 <div className="right flex-1">
-                  <p className="overflow-hidden font-geist-mono">{slide.overview}</p>
+                  <p className="overflow-hidden text-[18px] line-clamp-4 text-white/90 font-oswald tracking-wider">{slide.overview}</p>
                 </div>
 
               </div>

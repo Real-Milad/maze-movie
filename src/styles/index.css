@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 
 @custom-variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";;
@@ -11,14 +12,37 @@
   --font-geist-mono: "Geist Mono";
   --font-geostar-fill: "Geostar Fill";
   --font-roboto-slab: "Roboto Slab";
+  --font-oswald: "Oswald";
   --font-kavoon: "Kavoon";
+  --background-image-loading-text: linear-gradient(90deg, transparent 0% 16.66%, #142824 33.33% 50%, transparent 66.66% 75%);
+  --animate-preload-text: preloadText 2s linear infinite;
 }
+
+@keyframes preloadText {
+  0% {background-position: 100%;}
+  100% {background-position: 0%;}
+};
+
+@keyframes loadingText {
+  0% {background-position: 100%;}
+  100% {background-position: 0%;}
+}
+  /* 3b1515 */
+  /* 2c4539 */
+
+
+  /* body {
+    transition: background-color 500ms ease-in-out;
+  } */
+
+  body {
+    @apply bg-[#e0dddd] dark:bg-[#3b1515] bg-[url(noise.webp)] xl:mt-22 max-w-470 mx-auto scroll-smooth transition-all duration-500
+  }
 
 
 @layer base {
-  body {
-    @apply bg-[#0c1513] bg-[url(noise.webp)] xl:mt-20 max-w-470
-  }
+  
+
 
   body.preloading, 
   body.menu-open { 

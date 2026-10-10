@@ -16,10 +16,15 @@ export const MovieCard = ({ movie, isActive, onToggle }) => {
 
       <img src={`${IMAGE_URL}${movie.poster_path}`} alt={movie.title} className={`w-full h-full xl:group-hover:brightness-40 object-cover transition-all duration-700 ${isActive ? "brightness-40" : "brightness-100"}`}/>
       
-      <div className={`
+      {/* <div className={`
         absolute bottom-0 left-0 w-full h-full bg-white/10 backdrop-blur-md xl:translate-y-[110%] 
         xl:group-hover:translate-y-0  transition-transform duration-800 ease-in-out p-2
         ${isActive ? "translate-y-0" : "translate-y-[110%]"} flex flex-col justify-between
+      `}> */}
+      <div className={`
+        absolute inset-0 w-full h-full bg-white/10 backdrop-blur-md opacity-0 
+        xl:group-hover:opacity-100  transition-all duration-800 ease-in-out p-2
+        ${isActive ? "opacity-100" : "opacity-0"} flex flex-col justify-between
       `}>
 
         <div className="flex justify-between text-white px-1 text-[18px]">
