@@ -9,12 +9,14 @@
 
 
 @theme {
+  --color-dark-blue: #1E2640;
+  --color-desert-sun: #DC9750;
   --font-geist-mono: "Geist Mono";
   --font-geostar-fill: "Geostar Fill";
   --font-roboto-slab: "Roboto Slab";
   --font-oswald: "Oswald";
   --font-kavoon: "Kavoon";
-  --background-image-loading-text: linear-gradient(90deg, transparent 0% 16.66%, #142824 33.33% 50%, transparent 66.66% 75%);
+  --background-image-loading-text: linear-gradient(90deg, transparent 0% 16.66%, #DC9750 33.33% 50%, transparent 66.66% 75%);
   --animate-preload-text: preloadText 2s linear infinite;
 }
 
@@ -27,17 +29,13 @@
   0% {background-position: 100%;}
   100% {background-position: 0%;}
 }
-  /* 3b1515 */
-  /* 2c4539 */
 
 
-  /* body {
-    transition: background-color 500ms ease-in-out;
-  } */
 
-  body {
-    @apply bg-[#e0dddd] dark:bg-[#3b1515] bg-[url(noise.webp)] xl:mt-22 max-w-470 mx-auto scroll-smooth transition-all duration-500
-  }
+
+body {
+  @apply bg-[#cbcbcb] dark:bg-dark-blue bg-[url(noise.webp)] xl:mt-22 max-w-470 mx-auto scroll-smooth transition-all duration-500
+}
 
 
 @layer base {

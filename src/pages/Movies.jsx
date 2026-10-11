@@ -3,6 +3,7 @@ import { queryOptionMovies } from "../api/queryMovies"
 import { MovieCard } from "../components/shared/MovieCard";
 import { useEffect, useState } from "react";
 import { Pagination } from "../components/shared/Pagination";
+import { Filter } from "../components/shared/Filter";
 
 
 
@@ -24,7 +25,8 @@ export const Movies = () => {
 
   return (
     <>
-      <div className="mt-30 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
+      <Filter />
+      <div className="mt-15 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 
           <MovieCard 
             key={movie.id}

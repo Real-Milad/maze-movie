@@ -1,3 +1,4 @@
+import { Home } from "../pages/Home";
 import { Movies } from "../pages/Movies";
 import { Series } from "../pages/Series";
 import { RootLayout } from "../layout/RootLayout";
@@ -6,10 +7,10 @@ import { MoviesDetails } from "../pages/MoviesDetails";
 import { SeriesDetails } from "../pages/SeriesDetails";
 
 import { createBrowserRouter } from "react-router";
-import { Home } from "../pages/Home";
 
 
 export const router = createBrowserRouter([
+  
   {path: "/" , Component: RootLayout,
     children: [
       {path: "*", Component: PageNotFound},

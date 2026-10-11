@@ -3,7 +3,10 @@ import { BiUser } from "react-icons/bi";
 import { Link, NavLink } from "react-router";
 import ThemeToggle from "../shared/ThemeToggle";
 
-export const BigScreenNavLinks = ({isDark, onChange}) => {
+
+
+export const NavLinks = ({ isDark, onChange, scroll }) => {
+
   const homeNav = useRef(null);
   const moviesNav = useRef(null);
   const seriesNav = useRef(null);
@@ -32,9 +35,10 @@ export const BigScreenNavLinks = ({isDark, onChange}) => {
     }, 45);
   }
 
+  
   return (
     <div className="hidden xl:flex flex-3 items-center">
-      <nav className="font-geist-mono uppercase flex-center flex-2 text-[#e7e7e7] gap-13 tracking-widest text-[19px] h-13">
+      <nav className={`font-geist-mono uppercase flex-center flex-2 dark:text-[#e7e7e7] text-black gap-15 tracking-wider text-[16px] h-13 ${scroll ? "text-white" : "text-black"}`}>
         {navbar.map(item => (
           <NavLink key={item.id} to={item.to} ref={item.ref}
             onMouseOver={() => handleHover(item.ref, item.originalText)}
@@ -44,9 +48,9 @@ export const BigScreenNavLinks = ({isDark, onChange}) => {
         ))}
       </nav>
 
-      <div className="flex-center font-geist-mono uppercase tracking-widest flex-1 transition-colors duration-500 dark:text-[#e7e7e7] text-black lg:justify-end pr-5">
-        <div className="flex-center">
-          <BiUser size={20} className="mr-2"/>
+      <div className={`flex-center font-geist-mono uppercase tracking-wider flex-1 transition-colors duration-500 dark:text-[#e7e7e7] text-black lg:justify-end pr-5 ${scroll ? "text-white" : "text-black"} `}>
+        <div className="flex-center text-[15px]">
+          <BiUser size={18} className="mr-1"/>
           <Link 
             ref={login} 
             onMouseOver={() => handleHover(login, 'LOGIN')} 
@@ -54,8 +58,8 @@ export const BigScreenNavLinks = ({isDark, onChange}) => {
           >LOGIN</Link>
         </div>
 
-        <div className="pl-5 pt-2">
-          <ThemeToggle className={"size-15"} isDark={isDark} onChange={onChange} />
+        <div className="pl-5">
+          <ThemeToggle scale={0.4} isDark={isDark} onChange={onChange} />
         </div>
       </div>
     </div>

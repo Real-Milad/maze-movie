@@ -1,241 +1,141 @@
-import { useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useEffect, useState } from "react";
 
-// accent colour of the rings + icon in each theme
-const COLORS = { light: "#F59E0B", dark: "#A5B4FC" };
-const SPEED = 2; // timeline speed multiplier, raise it for a snappier animation
+/* ---------- hook: theme state + persistence ---------- */
+export function useTheme() {
+  // lazy initializer: only runs once, before first paint
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return "light";
+    const saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") return saved;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
 
-// Each ring = one <g> with its own opacity; the 4 rings fade out/in one after another.
-const RINGS = [
-  {
-    opacity: 0.6,
-    paths: [
-      "M405.89,246.78l-1.14,7.2a1,1,0,0,1-1.06.84,45.61,45.61,0,0,0-21.17,3.34,1,1,0,0,1-1.27-.47l-3.32-6.5a1,1,0,0,1,.5-1.38A54.84,54.84,0,0,1,405,245.62,1,1,0,0,1,405.89,246.78Z",
-      "M376.79,260a1,1,0,0,1-.38,1.3,45.81,45.81,0,0,0-8.48,6.68,45.34,45.34,0,0,0-6.67,8.48,1,1,0,0,1-1.31.38l-6.49-3.32a1,1,0,0,1-.42-1.4,54.33,54.33,0,0,1,19-19,1,1,0,0,1,1.4.42Z",
-      "M452.45,289.17l-7.22,1.14a1,1,0,0,1-1.12-.77,45,45,0,0,0-9.71-19.09,1,1,0,0,1,.05-1.36l5.16-5.17a1,1,0,0,1,1.46,0,54.39,54.39,0,0,1,12.21,24A1,1,0,0,1,452.45,289.17Z",
-      "M390.3,345.23l-1.13,7.22a1,1,0,0,1-1.21.83,54.39,54.39,0,0,1-24-12.21,1,1,0,0,1,0-1.46l5.17-5.16a1,1,0,0,1,1.36-.05,45,45,0,0,0,19.09,9.71A1,1,0,0,1,390.3,345.23Z",
-      "M448.81,322.07l-6.5-3.32a1,1,0,0,1-.47-1.27,45.61,45.61,0,0,0,3.34-21.17,1,1,0,0,1,.84-1.06l7.2-1.14a1,1,0,0,1,1.16.89,54.84,54.84,0,0,1-4.19,26.57A1,1,0,0,1,448.81,322.07Z",
-      "M446.54,326.52a1,1,0,0,1,.42,1.4,54.25,54.25,0,0,1-19,19,1,1,0,0,1-1.4-.42l-3.31-6.49a1,1,0,0,1,.38-1.3,45.78,45.78,0,0,0,15.16-15.16,1,1,0,0,1,1.3-.38Z",
-      "M421.57,350.19A54.84,54.84,0,0,1,395,354.38a1,1,0,0,1-.89-1.16l1.14-7.2a1,1,0,0,1,1.06-.84,45.61,45.61,0,0,0,21.17-3.34,1,1,0,0,1,1.27.47l3.32,6.5A1,1,0,0,1,421.57,350.19Z",
-      "M365.55,330.91l-5.16,5.17a1,1,0,0,1-1.46,0,54.39,54.39,0,0,1-12.21-24,1,1,0,0,1,.83-1.21l7.22-1.13a1,1,0,0,1,1.12.76,45,45,0,0,0,9.71,19.09A1,1,0,0,1,365.55,330.91Z",
-      "M354,304.75l-7.2,1.14a1,1,0,0,1-1.16-.89,54.84,54.84,0,0,1,4.19-26.57,1,1,0,0,1,1.38-.5l6.5,3.32a1,1,0,0,1,.47,1.27,45.61,45.61,0,0,0-3.34,21.17A1,1,0,0,1,354,304.75Z",
-      "M436.08,260.39l-5.17,5.16a1,1,0,0,1-1.36.05,45,45,0,0,0-19.09-9.71,1,1,0,0,1-.76-1.12l1.13-7.22a1,1,0,0,1,1.21-.83,54.39,54.39,0,0,1,24,12.21A1,1,0,0,1,436.08,260.39Z",
-    ],
-  },
-  {
-    opacity: 0.4,
-    paths: [
-      "M466.58,286.92l-7.21,1.14a1,1,0,0,1-1.12-.77,59.37,59.37,0,0,0-13.72-27,1,1,0,0,1,0-1.37l5.15-5.15a1,1,0,0,1,1.45,0,68.56,68.56,0,0,1,16.24,31.88A1,1,0,0,1,466.58,286.92Z",
-      "M388.06,359.37l-1.14,7.21a1,1,0,0,1-1.19.83,68.56,68.56,0,0,1-31.88-16.24,1,1,0,0,1,0-1.45l5.15-5.15a1,1,0,0,1,1.37,0,59.37,59.37,0,0,0,27,13.72A1,1,0,0,1,388.06,359.37Z",
-      "M461.57,328.57l-6.5-3.32a1,1,0,0,1-.46-1.29,59.8,59.8,0,0,0,4.7-29.87,1,1,0,0,1,.83-1.09l7.2-1.14a1,1,0,0,1,1.16.89A69.25,69.25,0,0,1,463,328.09,1,1,0,0,1,461.57,328.57Z",
-      "M428.09,363a69.25,69.25,0,0,1-35.34,5.55,1,1,0,0,1-.89-1.16l1.14-7.2a1,1,0,0,1,1.09-.83,60,60,0,0,0,29.87-4.7,1,1,0,0,1,1.29.46l3.32,6.5A1,1,0,0,1,428.09,363Z",
-      "M459.29,333a1,1,0,0,1,.42,1.4,68.54,68.54,0,0,1-25.3,25.3,1,1,0,0,1-1.4-.42l-3.3-6.5a1,1,0,0,1,.39-1.31,59.53,59.53,0,0,0,21.38-21.38,1,1,0,0,1,1.31-.39Z",
-      "M446.18,250.28,441,255.43a1,1,0,0,1-1.37,0,59.37,59.37,0,0,0-27-13.72,1,1,0,0,1-.77-1.12l1.14-7.21a1,1,0,0,1,1.19-.83,68.56,68.56,0,0,1,31.88,16.24A1,1,0,0,1,446.18,250.28Z",
-      "M355.43,341l-5.15,5.15a1,1,0,0,1-1.45,0,68.56,68.56,0,0,1-16.24-31.88,1,1,0,0,1,.83-1.19l7.21-1.14a1,1,0,0,1,1.12.77,59.37,59.37,0,0,0,13.72,27A1,1,0,0,1,355.43,341Z",
-      "M408.14,232.66l-1.14,7.2a1,1,0,0,1-1.09.83,59.8,59.8,0,0,0-29.87,4.7,1,1,0,0,1-1.29-.46l-3.32-6.5a1,1,0,0,1,.48-1.38,69.25,69.25,0,0,1,35.34-5.55A1,1,0,0,1,408.14,232.66Z",
-      "M339.86,307l-7.2,1.14a1,1,0,0,1-1.16-.89,69.25,69.25,0,0,1,5.55-35.34,1,1,0,0,1,1.38-.48l6.5,3.32a1,1,0,0,1,.46,1.29,59.8,59.8,0,0,0-4.7,29.87A1,1,0,0,1,339.86,307Z",
-      "M370.29,247.21a1,1,0,0,1-.39,1.31,59.53,59.53,0,0,0-21.38,21.38,1,1,0,0,1-1.31.39l-6.5-3.3a1,1,0,0,1-.42-1.4,68.54,68.54,0,0,1,25.3-25.3,1,1,0,0,1,1.4.42Z",
-    ],
-  },
-  {
-    opacity: 0.15,
-    paths: [
-      "M434.58,375.68a83.52,83.52,0,0,1-44.07,6.93,1,1,0,0,1-.88-1.15l1.14-7.2a1,1,0,0,1,1.1-.83,74.22,74.22,0,0,0,38.58-6.06,1,1,0,0,1,1.3.45l3.31,6.49A1,1,0,0,1,434.58,375.68Z",
-      "M472,339.51a1,1,0,0,1,.42,1.38,82.68,82.68,0,0,1-31.56,31.56,1,1,0,0,1-1.38-.42l-3.31-6.49a1,1,0,0,1,.4-1.32,74.14,74.14,0,0,0,15.68-11.94,73.37,73.37,0,0,0,11.94-15.69,1,1,0,0,1,1.32-.4Z",
-      "M480.7,284.68l-7.2,1.15a1,1,0,0,1-1.13-.79,73.35,73.35,0,0,0-17.72-34.8,1,1,0,0,1,0-1.37l5.15-5.16a1,1,0,0,1,1.45,0,82.69,82.69,0,0,1,20.26,39.76A1,1,0,0,1,480.7,284.68Z",
-      "M385.83,373.5l-1.15,7.2a1,1,0,0,1-1.18.83,82.69,82.69,0,0,1-39.76-20.26,1,1,0,0,1,0-1.45l5.16-5.15a1,1,0,0,1,1.37,0A73.35,73.35,0,0,0,385,372.37,1,1,0,0,1,385.83,373.5Z",
-      "M474.31,335.06l-6.49-3.31a1,1,0,0,1-.45-1.3,74.22,74.22,0,0,0,6.06-38.58,1,1,0,0,1,.83-1.1l7.2-1.14a1,1,0,0,1,1.15.88,83.52,83.52,0,0,1-6.93,44.07A1,1,0,0,1,474.31,335.06Z",
-      "M345.33,351.13l-5.15,5.16a1,1,0,0,1-1.45,0,82.69,82.69,0,0,1-20.26-39.76,1,1,0,0,1,.83-1.18l7.2-1.15a1,1,0,0,1,1.13.79,73.35,73.35,0,0,0,17.72,34.8A1,1,0,0,1,345.33,351.13Z",
-      "M410.37,218.54l-1.14,7.2a1,1,0,0,1-1.1.83,74.22,74.22,0,0,0-38.58,6.06,1,1,0,0,1-1.3-.45l-3.31-6.49a1,1,0,0,1,.48-1.37,83.52,83.52,0,0,1,44.07-6.93A1,1,0,0,1,410.37,218.54Z",
-      "M456.29,240.18l-5.16,5.15a1,1,0,0,1-1.37,0A73.35,73.35,0,0,0,415,227.63a1,1,0,0,1-.79-1.13l1.15-7.2a1,1,0,0,1,1.18-.83,82.69,82.69,0,0,1,39.76,20.26A1,1,0,0,1,456.29,240.18Z",
-      "M325.74,309.23l-7.2,1.14a1,1,0,0,1-1.15-.88,83.52,83.52,0,0,1,6.93-44.07,1,1,0,0,1,1.37-.48l6.49,3.31a1,1,0,0,1,.45,1.3,74.22,74.22,0,0,0-6.06,38.58A1,1,0,0,1,325.74,309.23Z",
-      "M363.81,234.46a1,1,0,0,1-.4,1.32,73.37,73.37,0,0,0-15.69,11.94,74.14,74.14,0,0,0-11.94,15.68,1,1,0,0,1-1.32.4L328,260.49a1,1,0,0,1-.42-1.38,82.68,82.68,0,0,1,31.56-31.56,1,1,0,0,1,1.38.42Z",
-    ],
-  },
-  {
-    opacity: 0.05,
-    paths: [
-      "M494.81,282.45l-7.19,1.14a1,1,0,0,1-1.13-.79,87.72,87.72,0,0,0-21.71-42.68,1,1,0,0,1,0-1.38l5.16-5.16a1,1,0,0,1,1.44,0,96.91,96.91,0,0,1,24.25,47.66A1,1,0,0,1,494.81,282.45Z",
-      "M487.05,341.55l-6.5-3.32a1,1,0,0,1-.45-1.3,88.54,88.54,0,0,0,7.46-47.3,1,1,0,0,1,.83-1.1l7.19-1.14a1,1,0,0,1,1.16.87,97.9,97.9,0,0,1-8.32,52.82A1,1,0,0,1,487.05,341.55Z",
-      "M383.59,387.62l-1.14,7.19a1,1,0,0,1-1.18.84,96.91,96.91,0,0,1-47.66-24.25,1,1,0,0,1,0-1.44l5.16-5.16a1,1,0,0,1,1.38,0,87.72,87.72,0,0,0,42.68,21.71A1,1,0,0,1,383.59,387.62Z",
-      "M311.61,311.47l-7.19,1.14a1,1,0,0,1-1.16-.87,97.89,97.89,0,0,1,8.32-52.82,1,1,0,0,1,1.37-.47l6.5,3.32a1,1,0,0,1,.45,1.3,88.54,88.54,0,0,0-7.46,47.3A1,1,0,0,1,311.61,311.47Z",
-      "M335.2,361.26,330,366.42a1,1,0,0,1-1.44,0,96.91,96.91,0,0,1-24.25-47.66,1,1,0,0,1,.84-1.18l7.19-1.14a1,1,0,0,1,1.13.79,87.72,87.72,0,0,0,21.71,42.68A1,1,0,0,1,335.2,361.26Z",
-      "M357.3,221.71a1,1,0,0,1-.4,1.31A88.37,88.37,0,0,0,323,256.9a1,1,0,0,1-1.31.4l-6.5-3.31a1,1,0,0,1-.42-1.38,97.64,97.64,0,0,1,37.82-37.82,1,1,0,0,1,1.38.42Z",
-      "M412.61,204.42l-1.14,7.19a1,1,0,0,1-1.1.83,88.53,88.53,0,0,0-47.3,7.45,1,1,0,0,1-1.3-.44l-3.32-6.5a1,1,0,0,1,.47-1.37,97.9,97.9,0,0,1,52.82-8.32A1,1,0,0,1,412.61,204.42Z",
-      "M441.08,388.42a97.89,97.89,0,0,1-52.82,8.32,1,1,0,0,1-.87-1.16l1.14-7.19a1,1,0,0,1,1.1-.83,88.54,88.54,0,0,0,47.3-7.46,1,1,0,0,1,1.3.45l3.32,6.5A1,1,0,0,1,441.08,388.42Z",
-      "M484.79,346a1,1,0,0,1,.42,1.38,97.64,97.64,0,0,1-37.82,37.82,1,1,0,0,1-1.38-.42l-3.31-6.5a1,1,0,0,1,.4-1.31A88.37,88.37,0,0,0,477,343.1a1,1,0,0,1,1.31-.4Z",
-      "M466.42,230l-5.16,5.16a1,1,0,0,1-1.38,0,87.72,87.72,0,0,0-42.68-21.71,1,1,0,0,1-.79-1.13l1.14-7.19a1,1,0,0,1,1.18-.84,96.91,96.91,0,0,1,47.66,24.25A1,1,0,0,1,466.42,230Z",
-    ],
-  },
-];
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-/**
- * Controlled component: the parent owns the theme.
- *   isDark   - current theme (boolean)
- *   onChange - called with the next value when the user clicks
- */
-export default function ThemeToggle({ isDark, onChange, className = "size-24" }) {
-  const [busy, setBusy] = useState(false);
-  const rootRef = useRef(null);
-  const ctxRef = useRef(null);
-  const shownRef = useRef(null); // which theme the icon/rings are currently showing
+  return [theme, setTheme];
+}
 
-  // scoped GSAP context, created once
-  useLayoutEffect(() => {
-    ctxRef.current = gsap.context(() => {}, rootRef);
-    return () => {
-      ctxRef.current?.revert();
-      shownRef.current = null;
-    };
-  }, []);
+/* ---------- small pieces ---------- */
+function Star({ className = "", size = 8 }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      className={`absolute fill-white ${className}`}
+      aria-hidden="true"
+    >
+      <path d="M12 0l2.9 8.1L24 12l-9.1 3.9L12 24l-2.9-8.1L0 12l9.1-3.9z" />
+    </svg>
+  );
+}
 
-  // Jump (no animation) to the right look whenever isDark and the visuals disagree:
-  // first render, or the parent changed the theme by itself (localStorage, system setting...).
-  useLayoutEffect(() => {
-    if (shownRef.current === isDark) return; // our own animation already handled it
-    const color = isDark ? COLORS.dark : COLORS.light;
-    ctxRef.current.add(() => {
-      gsap.set(".radialGroup g", { fill: color });
-      gsap.set(".sun, .moon", { stroke: color, svgOrigin: "400 300" });
-      gsap.set(".sun", { autoAlpha: isDark ? 0 : 1, scale: isDark ? 0 : 1 });
-      gsap.set(".moon", { autoAlpha: isDark ? 1 : 0, scale: isDark ? 1 : 0 });
-    });
-    shownRef.current = isDark;
-  }, [isDark]);
+function Cloud({ className = "" }) {
+  return (
+    <div className={`absolute ${className}`} aria-hidden="true">
+      <div className="absolute bottom-0 left-0 h-5 w-12 rounded-full bg-white/80" />
+      <div className="absolute bottom-2 left-2 h-6 w-6 rounded-full bg-white/80" />
+      <div className="absolute bottom-2 left-6 h-7 w-7 rounded-full bg-white/80" />
+    </div>
+  );
+}
 
-  const play = (nextDark) => {
-    const color = nextDark ? COLORS.dark : COLORS.light;
-    const [leaving, entering] = nextDark ? [".sun", ".moon"] : [".moon", ".sun"];
-    const turn = nextDark ? 90 : -90;
-
-    ctxRef.current.add(() => {
-      gsap
-        .timeline({ onComplete: () => setBusy(false) })
-        .timeScale(SPEED)
-
-        // rings change colour one after another
-        .to(".radialGroup g", { duration: 1, fill: color, stagger: 0.2 })
-        .to(".sun, .moon", { duration: 0.6, stroke: color }, 0)
-
-        // old icon spins away, new icon spins in
-        .to(
-          leaving,
-          { duration: 0.4, rotation: turn, scale: 0, autoAlpha: 0, ease: "back.in(1.7)" },
-          0
-        )
-        .fromTo(
-          entering,
-          { rotation: -turn, scale: 0, autoAlpha: 0 },
-          { duration: 0.8, rotation: 0, scale: 1, autoAlpha: 1, ease: "back.out(1.7)" },
-          0.3
-        )
-
-        // rings blink out and back in
-        .to(
-          ".radialGroup g",
-          {
-            duration: 0.3,
-            opacity: 0,
-            repeat: 1,
-            ease: "sine.out",
-            yoyoEase: "sine.out",
-            stagger: 0.1,
-          },
-          0
-        )
-
-        // each segment pulses slightly inward
-        .to(
-          ".radialGroup g path",
-          {
-            duration: 0.3,
-            scale: 0.95,
-            svgOrigin: "400 300",
-            repeat: 1,
-            ease: "sine.in",
-            yoyoEase: "sine.out",
-            stagger: 0.0163,
-          },
-          0.1
-        )
-
-        // whole radial group spins 36°
-        .to(
-          ".radialGroup",
-          {
-            duration: 1,
-            svgOrigin: "400 300",
-            rotation: "+=36",
-            ease: "elastic.out(0.5, 0.75)",
-          },
-          0
-        );
-    });
-  };
-
-  const toggle = () => {
-    if (busy) return;
-    const next = !isDark;
-    setBusy(true);
-    shownRef.current = next; // tell the sync effect above: animation handles this one
-    play(next);
-    onChange(next);
-  };
+/* ---------- the toggle ---------- */
+// scale: 1 = 144x72px, 0.5 = 72x36px, 1.5 = 216x108px ...
+export default function ThemeToggle({ scale = 1 }) {
+  const [theme, setTheme] = useTheme();
+  const isDark = theme === "dark";
 
   return (
+    <div style={{ width: 144 * scale, height: 72 * scale }}>
     <button
-      ref={rootRef}
       type="button"
-      onClick={toggle}
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      aria-pressed={isDark}
-      className={`${className} cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 [-webkit-tap-highlight-color:transparent]`}
+      style={{ transform: `scale(${scale})` }}
+      role="switch"
+      aria-checked={isDark}
+      aria-label="Toggle dark mode"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="relative h-[72px] w-36 origin-top-left shrink-0 cursor-pointer overflow-hidden rounded-full
+                 border-2 border-white/70 shadow-[0_6px_14px_rgba(0,0,0,.15)] outline-none
+                 focus-visible:ring-4 focus-visible:ring-indigo-400/60"
     >
-      {/* viewBox is cropped tight around the rings (centre 400,300) */}
-      <svg viewBox="296 196 208 208" className="size-full" aria-hidden="true">
-        <g className="radialGroup">
-          {RINGS.map((ring, i) => (
-            <g key={i} opacity={ring.opacity} fill={COLORS.light}>
-              {ring.paths.map((d, j) => (
-                <path key={j} d={d} />
-              ))}
-            </g>
-          ))}
-        </g>
+      {/* Day background */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-b from-indigo-500 via-indigo-200 to-yellow-200
+                    transition-opacity duration-700 motion-reduce:transition-none
+                    ${isDark ? "opacity-0" : "opacity-100"}`}
+      />
+      {/* Night background */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-b from-slate-900 to-indigo-900
+                    transition-opacity duration-700 motion-reduce:transition-none
+                    ${isDark ? "opacity-100" : "opacity-0"}`}
+      />
 
-        {/* outer <g> is animated by GSAP, inner <g> only positions/scales the icon */}
-        <g className="sun">
-          <g
-            transform="translate(400 300) scale(1.7) translate(-12 -12)"
-            fill="none"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </g>
-        </g>
+      {/* Clouds (visible in day, on the right) */}
+      <div
+        className={`absolute inset-0 transition-all duration-700 motion-reduce:transition-none
+                    ${isDark ? "translate-y-8 opacity-0" : "translate-y-0 opacity-100"}`}
+      >
+        <Cloud className="right-14 top-3 scale-75" />
+        <Cloud className="right-2 top-6" />
+      </div>
 
-        <g className="moon">
-          <g
-            transform="translate(400 300) scale(1.7) translate(-12 -12)"
-            fill="none"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </g>
-        </g>
-      </svg>
+      {/* Stars (visible in night, on the left) */}
+      <div
+        className={`absolute inset-0 transition-all duration-700 motion-reduce:transition-none
+                    ${isDark ? "translate-y-0 opacity-100" : "-translate-y-8 opacity-0"}`}
+      >
+        <Star className="left-4 top-4" size={8} />
+        <Star className="left-9 top-9" size={6} />
+        <Star className="left-14 top-3" size={10} />
+        <Star className="left-5 bottom-3" size={7} />
+        <Star className="left-12 bottom-4" size={6} />
+        <Star className="left-20 top-7" size={5} />
+      </div>
+
+      {/* Inner shadow: makes the track look carved into the surface */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-full
+                   shadow-[inset_0_7px_12px_rgba(0,0,0,.35),inset_0_-3px_6px_rgba(255,255,255,.25)]"
+      />
+
+      {/* Knob + halo rings */}
+      <div
+        className={`absolute inset-y-0 left-2 my-auto h-14 w-14 transition-transform duration-700
+                    ease-[cubic-bezier(.68,-.2,.27,1.2)] motion-reduce:transition-none
+                    ${isDark ? "translate-x-[68px]" : "translate-x-0"}`}
+      >
+        {/* rings */}
+        <span className="absolute -inset-3 rounded-full bg-white/10" />
+        <span className="absolute -inset-6 rounded-full bg-white/10" />
+        <span className="absolute -inset-9 rounded-full bg-white/5" />
+
+        {/* sun */}
+        <span
+          className={`absolute inset-0 rounded-full bg-yellow-300 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,.15),inset_3px_3px_6px_rgba(255,255,255,.5),0_5px_10px_rgba(0,0,0,.35),0_0_18px_rgba(253,224,71,.8)]
+                      transition-all duration-700 motion-reduce:transition-none
+                      ${isDark ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"}`}
+        />
+
+        {/* moon */}
+        <span
+          className={`absolute inset-0 rounded-full bg-slate-200 shadow-[inset_-4px_-4px_8px_rgba(0,0,0,.2),inset_3px_3px_6px_rgba(255,255,255,.6),0_5px_10px_rgba(0,0,0,.45)]
+                      transition-all duration-700 motion-reduce:transition-none
+                      ${isDark ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"}`}
+        >
+          <span className="absolute right-2 top-2 h-4 w-4 rounded-full bg-indigo-300/70" />
+          <span className="absolute bottom-2.5 left-3 h-3.5 w-3.5 rounded-full bg-indigo-300/70" />
+          <span className="absolute left-2 top-4 h-2 w-2 rounded-full bg-indigo-300/70" />
+        </span>
+      </div>
     </button>
+    </div>
   );
 }

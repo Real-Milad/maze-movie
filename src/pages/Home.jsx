@@ -8,7 +8,6 @@ export const Home = () => {
   return (
     <div>
       <Hero />
-
       <HeroSmallScreen />
       <InfinitSlider />
     </div>

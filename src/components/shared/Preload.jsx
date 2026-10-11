@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
 
+
+
 export const Preload = () => {
+
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
@@ -12,23 +15,25 @@ export const Preload = () => {
     }, 3000);
 
     return () => clearTimeout(timer);
-
   }, [load]);
 
 
   return (
-    <div className={`fixed inset-0 flex-center flex-col z-20 delay-500  bg-[url(noise.webp)]
-    duration-900 bg-black ${load && "translate-y-full"}`}>
+    <div className={`
+      fixed inset-0 flex-center flex-col bg-[#1E2640] bg-[url(noise.webp)]
+      duration-900 delay-500 z-20 ${load && "translate-y-full"}`}>
 
       <div className={`duration-250 ${load && "opacity-0"}`}>
-        <DNA height="200" width="200" dnaColorOne="#0c1513" dnaColorTwo="#0c1510" />
+        <DNA height="150" width="150" dnaColorOne="#DC9750" dnaColorTwo="#DC9750" />
       </div>
 
-      <p className={`
-        text-[100px] font-geostar-fill leading-60 tracking-[16px] text-transparent 
-        bg-size-[500%] bg-clip-text bg-loading-text animate-preload-text duration-250 
-        ${ load && "opacity-0" }
-      `}>Maze Movie</p>
+      <div className="w-full h-max">
+        <p className={`
+          text-[40px] md:text-[60px] xl:text-[70px] font-geostar-fill text-center text-transparent tracking-wide
+          bg-size-[500%] bg-clip-text bg-loading-text animate-preload-text duration-250 
+          ${ load && "opacity-0" }
+        `}>Maze Movie</p>
+      </div>
 
     </div>
   );
