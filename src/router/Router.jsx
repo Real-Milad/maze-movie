@@ -7,19 +7,16 @@ import { MoviesDetails } from "../pages/MoviesDetails";
 import { SeriesDetails } from "../pages/SeriesDetails";
 
 import { createBrowserRouter } from "react-router";
+import { moviesLoader } from "../loader/moviesloader";
 
 
 export const router = createBrowserRouter([
-  
   {path: "/" , Component: RootLayout,
     children: [
       {path: "*", Component: PageNotFound},
-
       {index: true, Component: Home},
-
-      {path: "movies", Component: Movies},
+      {path: "movies", Component: Movies, loader: moviesLoader},
       {path: "movies/:id", Component: MoviesDetails},
-
       {path: "series", Component: Series},
       {path: "series/:id", Component: SeriesDetails},
     ]

@@ -3,29 +3,36 @@ import { queryOptionMovies } from "../api/queryMovies"
 import { MovieCard } from "../components/shared/MovieCard";
 import { useEffect, useState } from "react";
 import { Pagination } from "../components/shared/Pagination";
-import { Filter } from "../components/shared/Filter";
-
-
+import { MoviesFilter } from "../components/shared/MoviesFilter";
+import { useSearchParams } from "react-router";
 
 
 export const Movies = () => {
 
+  const [searchParams] = useSearchParams();
+  const sort = searchParams.get("sort") ?? "popularity.desc";
+  const year = searchParams.get("year");
+  const genres = searchParams.get("genres");
+  const rating = searchParams.get("rating");
+
   const totalPage = 10
   const [page, setPage] = useState(1)
   const [activeId, setActiveId] = useState(false);
-  const { data, isPending, isError } = useQuery(queryOptionMovies(page));
+  const { data, isPending, isError } = useQuery(queryOptionMovies(sort, year, genres, rating, page));
 
   useEffect(() => {
     window.scrollTo(0,0);
   }, [page]);
 
-  if (isPending) return <p>Loading....</p>
 
+  if (isPending) return <p>Loading....</p>
   if (isError) return <p>Something was Wrong!</p>
+
 
   return (
     <>
-      <Filter />
+      <MoviesFilter />
+      
       <div className="mt-15 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 
           <MovieCard 

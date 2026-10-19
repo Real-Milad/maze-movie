@@ -4,7 +4,6 @@ import { HeroSmallScreen } from "../components/home/HeroSmallScreen"
 
 
 export const Home = () => {
-
   return (
     <div>
       <Hero />

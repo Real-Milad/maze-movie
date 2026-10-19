@@ -1,24 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
 
 @custom-variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";;
 
 
 @theme {
-  --color-dark-blue: #1E2640;
+  --color-dark-blue: #151b2d;
   --color-desert-sun: #DC9750;
   --font-geist-mono: "Geist Mono";
   --font-geostar-fill: "Geostar Fill";
   --font-roboto-slab: "Roboto Slab";
   --font-oswald: "Oswald";
   --font-kavoon: "Kavoon";
-  --background-image-loading-text: linear-gradient(90deg, transparent 0% 16.66%, #DC9750 33.33% 50%, transparent 66.66% 75%);
   --animate-preload-text: preloadText 2s linear infinite;
+  --background-image-loading-text: linear-gradient(90deg, transparent 0% 16.66%, #DC9750 33.33% 50%, transparent 66.66% 75%);
 }
+
+body {
+  @apply bg-[#cbcbcb] dark:bg-dark-blue bg-[url(noise.webp)] xl:mt-22 max-w-470 mx-auto scroll-smooth transition-all duration-500
+}
+
+body.preloading, body.menu-open { @apply overflow-hidden }
+.flex-center { @apply flex items-center justify-center }
+.slider-reveal { @apply opacity-0 }
+.slider-item.active .slider-reveal { animation: sliderReveal 1s ease forwards }
+.slider-item.active .count { animation-delay: 500ms }
+.slider-item.active .hero-banner { animation-delay: 1000ms }
+.slider-item.active .hero-title { animation-delay: 1500ms }
+.slider-item.active .hero-date { animation-delay: 2000ms }
+.slider-item.active .hero-lang { animation-delay: 2500ms }
+.slider-item.active .hero-vote { animation-delay: 3000ms }
+.cont:hover ul { animation-play-state: paused }
+
 
 @keyframes preloadText {
   0% {background-position: 100%;}
@@ -28,78 +45,6 @@
 @keyframes loadingText {
   0% {background-position: 100%;}
   100% {background-position: 0%;}
-}
-
-
-
-
-body {
-  @apply bg-[#cbcbcb] dark:bg-dark-blue bg-[url(noise.webp)] xl:mt-22 max-w-470 mx-auto scroll-smooth transition-all duration-500
-}
-
-
-@layer base {
-  
-
-
-  body.preloading, 
-  body.menu-open { 
-    @apply overflow-hidden 
-  }
-}
-
-
-@layer components {
-  .flex-center {
-    @apply flex items-center justify-center
-  }
-
-  .slider-reveal { 
-    @apply opacity-0 
-  }
-
-  .slider-item.active .slider-reveal { 
-    animation: sliderReveal 1s ease forwards 
-  }
-
-  .slider-item.active .count { 
-    animation-delay: 500ms 
-  }
-
-  .slider-item.active .hero-banner { 
-    animation-delay: 1000ms 
-  }
-
-  .slider-item.active .hero-title { 
-    animation-delay: 1500ms 
-  }
-
-  .slider-item.active .hero-date { 
-    animation-delay: 2000ms 
-  }
-
-  .slider-item.active .hero-lang { 
-    animation-delay: 2500ms 
-  }
-
-  .slider-item.active .hero-vote { 
-    animation-delay: 3000ms 
-  }
-
-}
-
-
-
-
-@keyframes sliderReveal {
-  0% {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 
 @keyframes scroll {
@@ -114,6 +59,13 @@ body {
   }
 }
 
-.cont:hover ul { 
-  animation-play-state: paused 
+@keyframes sliderReveal {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
