@@ -5,9 +5,10 @@ const API_KEY  = "b35075d745427f1b6e88aee35137fe1b";
 
 async function fetchMovies(sort, year, genres, rating, page) {
   const genreQuery = genres ? `&with_genres=${genres}` : "";
-  const yearQuery = year ? `&primary_release_year=${year}` : ""
+  const yearQuery = year ? `&primary_release_year=${year}` : "";
+  const ratingQuery = rating ? `&vote_average.gte=${rating}` : "";
 
-  const response = await fetch(`${BASE_URL}?language=en-US&sort_by=${sort}&page=${page}${genreQuery}&${yearQuery}&api_key=${API_KEY}`);
+  const response = await fetch(`${BASE_URL}?sort_by=${sort}&page=${page}${genreQuery}${yearQuery}${ratingQuery}&api_key=${API_KEY}`);
   if (!response.ok) throw new Error("Faild to fetch movies");
   return response.json();
 };

@@ -4,24 +4,7 @@ import { Form, useSearchParams } from "react-router"
 
 export const MoviesFilter = () => {
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-
-  const handleChange = (e) => {
-    const params = new URLSearchParams(searchParams);
-
-    const { name, value } = e.target;
-
-    if (value) {
-      params.set(name, value);
-    } else {
-      params.delete(name);
-    }
-
-    setSearchParams(params);
-  };
-
-
+  const [searchParams] = useSearchParams();
 
   return (
     <Form method="get">
