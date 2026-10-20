@@ -23,9 +23,11 @@ export const Movies = () => {
     setSearchParams(params)
   }
 
-  const totalPage = 10
   const [activeId, setActiveId] = useState(false);
   const { data, isPending, isError } = useQuery(queryOptionMovies(sort, year, genres, rating, page));
+  const totalPage = data?.total_pages;
+  console.log(totalPage)
+
 
   useEffect(() => {
     window.scrollTo(0,0);

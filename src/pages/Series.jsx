@@ -25,9 +25,9 @@ export const Series = () => {
     setSearchParams(params)
   }
 
-  const totalPage = 10
   const [activeId, setActiveId] = useState(false);
   const { data, isPending, isError } = useQuery(queryOptionSeries(sort, year, genres, rating, page));
+  const totalPage = data?.total_pages;
 
 
 
@@ -47,6 +47,7 @@ export const Series = () => {
       <div className="mt-15 min-h-dvh grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 
           <MovieCard 
+            type="tv"
             key={movie.id}
             movie={movie} 
             isActive={activeId === movie.id}

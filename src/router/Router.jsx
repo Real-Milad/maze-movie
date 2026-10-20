@@ -1,4 +1,5 @@
 import { Home } from "../pages/Home";
+import { Search } from "../pages/Search";
 import { Movies } from "../pages/Movies";
 import { Series } from "../pages/Series";
 import { RootLayout } from "../layout/RootLayout";
@@ -8,7 +9,6 @@ import { SeriesDetails } from "../pages/SeriesDetails";
 
 import { createBrowserRouter } from "react-router";
 import { moviesLoader } from "../loader/moviesloader";
-import { Search } from "../components/shared/Search";
 
 
 export const router = createBrowserRouter([
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       {path: "movies/:id", Component: MoviesDetails},
       {path: "series", Component: Series},
       {path: "series/:id", Component: SeriesDetails},
-      {path: "search", Component: Search},
+      {path: "search", Component: Search },
     ]
   }
 ])

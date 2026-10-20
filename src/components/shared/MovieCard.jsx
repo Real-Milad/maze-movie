@@ -5,9 +5,10 @@ import { useNavigate } from "react-router";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/original";
 
-export const MovieCard = ({ movie, isActive, onToggle }) => {
+export const MovieCard = ({ movie, isActive, onToggle, type }) => {
   const navigate = useNavigate()
 
+  
 
   return (
     <div data-active={isActive} onClick={onToggle} className="w-full h-full relative group overflow-hidden rounded-[5px] z-5 shadow-lg shadow-neutral-900">
@@ -25,11 +26,11 @@ export const MovieCard = ({ movie, isActive, onToggle }) => {
 
         <div className="flex justify-between text-white px-1 text-[18px]">
           <p className="flex justify-center items-center gap-2">
-            <FaLanguage />{movie.original_language.toUpperCase()}
+            <FaLanguage />{movie.original_language?.toUpperCase()}
           </p>
           
           <p className="flex justify-center items-center gap-2">
-            <PiStarFill />{movie.vote_average.toFixed(1)}
+            <PiStarFill />{movie.vote_average?.toFixed(1)}
           </p>
         </div>
 
@@ -40,7 +41,7 @@ export const MovieCard = ({ movie, isActive, onToggle }) => {
             <MdDateRange />{movie.release_date?.split("-")[0] || movie.first_air_date?.split("-")[0]}
           </p>
 
-          <button className="bg-neutral-900 py-2 px-3 text-[14px] rounded-[5px] cursor-pointer hover:bg-neutral-800 transition-all " onClick={() => navigate(`/movies/${movie.id}`)}>
+          <button className="bg-neutral-900 py-2 px-3 text-[14px] rounded-[5px] cursor-pointer hover:bg-neutral-800 transition-all " onClick={() => navigate(type === "tv" ? `/series/${movie.id}` : `/movies/${movie.id}`)}>
             More Info
           </button>
         </div>

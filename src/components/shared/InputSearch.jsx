@@ -1,8 +1,7 @@
 import { Form } from "react-router"
 
 
-export const Search = () => {
-
+export const InputSearch = () => {
 
   return (
     <div className="w-[95%] mx-auto mt-20 h-50 bg-neutral-700/50 text-white">
