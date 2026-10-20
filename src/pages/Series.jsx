@@ -4,16 +4,32 @@ import { MovieCard } from "../components/shared/MovieCard";
 import { useEffect, useState } from "react";
 import { Pagination } from "../components/shared/Pagination";
 import { queryOptionSeries } from "../api/querySeries";
+import { useSearchParams } from "react-router";
+import { SeriesFilter } from "../components/shared/SeriesFilter";
 
 
 
 
 export const Series = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const sort = searchParams.get("sort") ?? "popularity.desc";
+  const year = searchParams.get("year");
+  const genres = searchParams.get("genres");
+  const rating = searchParams.get("rating");
+
+  const page = Number(searchParams.get("page") ?? 1);
+
+  const setPage = (newPage) => {
+    const params = new URLSearchParams(searchParams)
+    params.set("page", newPage)
+    setSearchParams(params)
+  }
 
   const totalPage = 10
-  const [page, setPage] = useState(1)
   const [activeId, setActiveId] = useState(false);
-  const { data, isPending, isError } = useQuery(queryOptionSeries(page));
+  const { data, isPending, isError } = useQuery(queryOptionSeries(sort, year, genres, rating, page));
+
+
 
   useEffect(() => {
     window.scrollTo(0,0);
@@ -25,8 +41,10 @@ export const Series = () => {
 
   return (
     <>
+
+      <SeriesFilter />
       
-      <div className="mt-15 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
+      <div className="mt-15 min-h-dvh grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 
           <MovieCard 
             key={movie.id}

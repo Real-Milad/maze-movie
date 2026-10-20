@@ -32,7 +32,7 @@ export const Pagination = ({ page, setPage, totalPage }) => {
 
       <button 
         disabled={page === 1} 
-        onClick={() => setPage(prev => prev - 1)}
+        onClick={() => setPage(page - 1)}
         className="rounded-lg bg-[#14677c] p-2 text-neutral-200 
         text-[14px] font-bold font-sans hover:bg-[#14677c] disabled:opacity-50"
       ><IoIosArrowBack /></button>
@@ -52,7 +52,7 @@ export const Pagination = ({ page, setPage, totalPage }) => {
 
       <button 
         disabled={page === totalPage} 
-        onClick={() => setPage(prev => prev + 1)}
+        onClick={() => setPage(page + 1)}
         className="rounded-lg bg-[#14677c] p-2 text-neutral-700 
         text-[14px] font-bold font-sans hover:bg-[#14677c] disabled:opacity-50"
       ><IoIosArrowForward /></button>

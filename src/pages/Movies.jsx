@@ -9,14 +9,21 @@ import { useSearchParams } from "react-router";
 
 export const Movies = () => {
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const sort = searchParams.get("sort") ?? "popularity.desc";
   const year = searchParams.get("year");
   const genres = searchParams.get("genres");
   const rating = searchParams.get("rating");
 
+  const page = Number(searchParams.get("page") ?? 1);
+
+  const setPage = (newPage) => {
+    const params = new URLSearchParams(searchParams)
+    params.set("page", newPage)
+    setSearchParams(params)
+  }
+
   const totalPage = 10
-  const [page, setPage] = useState(1)
   const [activeId, setActiveId] = useState(false);
   const { data, isPending, isError } = useQuery(queryOptionMovies(sort, year, genres, rating, page));
 

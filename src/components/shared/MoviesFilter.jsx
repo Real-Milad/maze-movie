@@ -45,7 +45,7 @@ export const MoviesFilter = () => {
         <option value="4">4</option>
       </select>
 
-      <button type="submit" onClick={handleChange}>Filter</button>
+      <button type="submit">Filter</button>
     </Form>
   )
 }

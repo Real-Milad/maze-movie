@@ -37,7 +37,7 @@ export const MovieCard = ({ movie, isActive, onToggle }) => {
 
         <div className="flex justify-between items-center text-white">
           <p className="flex items-center justify-center gap-2 text-[14px]">
-            <MdDateRange />{movie.release_date?.split("-")[0]}
+            <MdDateRange />{movie.release_date?.split("-")[0] || movie.first_air_date?.split("-")[0]}
           </p>
 
           <button className="bg-neutral-900 py-2 px-3 text-[14px] rounded-[5px] cursor-pointer hover:bg-neutral-800 transition-all " onClick={() => navigate(`/movies/${movie.id}`)}>

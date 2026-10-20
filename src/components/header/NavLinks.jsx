@@ -48,7 +48,7 @@ export const NavLinks = ({ isDark, onChange, scroll }) => {
         ))}
       </nav>
 
-      <div className={`flex-center font-geist-mono uppercase tracking-wider flex-1 transition-colors duration-500 dark:text-[#e7e7e7] text-black lg:justify-end pr-5 ${scroll ? "text-white" : "text-black"} `}>
+      <div className={`flex items-center justify-end font-geist-mono uppercase tracking-wider flex-1 transition-colors duration-500 dark:text-[#e7e7e7] text-black lg:justify-end pr-5 ${scroll ? "text-white" : "text-black"} `}>
         <div className="flex-center text-[15px]">
           <BiUser size={18} className="mr-1"/>
           <Link 
