@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
+import { useEffect, useState } from "react";
 
 
 
@@ -18,13 +18,14 @@ export const Preload = () => {
   }, [load]);
 
 
+
   return (
     <div className={`
-      fixed inset-0 flex-center flex-col bg-[#1E2640] bg-[url(noise.webp)]
+      fixed inset-0 flex-center flex-col bg-dark-blue bg-[url(noise.webp)]
       duration-900 delay-500 z-20 ${load && "translate-y-full"}`}>
 
       <div className={`duration-250 ${load && "opacity-0"}`}>
-        <DNA height="150" width="150" dnaColorOne="#DC9750" dnaColorTwo="#DC9750" />
+        <DNA height="150" width="150" dnaColorOne="#cbcbcb" dnaColorTwo="#cbcbcb" />
       </div>
 
       <div className="w-full h-max">

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
-/* ---------- hook: theme state + persistence ---------- */
-export function useTheme() {
+function useTheme() {
   // lazy initializer: only runs once, before first paint
   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") return "light";
@@ -20,7 +19,7 @@ export function useTheme() {
   return [theme, setTheme];
 }
 
-/* ---------- small pieces ---------- */
+
 function Star({ className = "", size = 8 }) {
   return (
     <svg
@@ -35,6 +34,7 @@ function Star({ className = "", size = 8 }) {
   );
 }
 
+
 function Cloud({ className = "" }) {
   return (
     <div className={`absolute ${className}`} aria-hidden="true">
@@ -45,9 +45,10 @@ function Cloud({ className = "" }) {
   );
 }
 
-/* ---------- the toggle ---------- */
-// scale: 1 = 144x72px, 0.5 = 72x36px, 1.5 = 216x108px ...
-export default function ThemeToggle({ scale = 1 }) {
+
+
+
+export const ThemeToggle = ({ scale = 1 }) => {
   const [theme, setTheme] = useTheme();
   const isDark = theme === "dark";
 
@@ -60,19 +61,19 @@ export default function ThemeToggle({ scale = 1 }) {
       aria-checked={isDark}
       aria-label="Toggle dark mode"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative h-[72px] w-36 origin-top-left shrink-0 cursor-pointer overflow-hidden rounded-full
+      className="relative h-18 w-36 origin-top-left shrink-0 cursor-pointer overflow-hidden rounded-full
                  border-2 border-white/70 shadow-[0_6px_14px_rgba(0,0,0,.15)] outline-none
                  focus-visible:ring-4 focus-visible:ring-indigo-400/60"
     >
       {/* Day background */}
       <div
-        className={`absolute inset-0 bg-gradient-to-b from-indigo-500 via-indigo-200 to-yellow-200
+        className={`absolute inset-0 bg-linear-to-b from-indigo-500 via-indigo-200 to-yellow-200
                     transition-opacity duration-700 motion-reduce:transition-none
                     ${isDark ? "opacity-0" : "opacity-100"}`}
       />
       {/* Night background */}
       <div
-        className={`absolute inset-0 bg-gradient-to-b from-slate-900 to-indigo-900
+        className={`absolute inset-0 bg-linear-to-b from-slate-900 to-indigo-900
                     transition-opacity duration-700 motion-reduce:transition-none
                     ${isDark ? "opacity-100" : "opacity-0"}`}
       />
@@ -110,7 +111,7 @@ export default function ThemeToggle({ scale = 1 }) {
       <div
         className={`absolute inset-y-0 left-2 my-auto h-14 w-14 transition-transform duration-700
                     ease-[cubic-bezier(.68,-.2,.27,1.2)] motion-reduce:transition-none
-                    ${isDark ? "translate-x-[68px]" : "translate-x-0"}`}
+                    ${isDark ? "translate-x-17" : "translate-x-0"}`}
       >
         {/* rings */}
         <span className="absolute -inset-3 rounded-full bg-white/10" />

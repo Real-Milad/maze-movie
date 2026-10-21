@@ -9,19 +9,20 @@
 
 
 @theme {
-  --color-dark-blue: #151b2d;
-  --color-desert-sun: #DC9750;
+  --color-dark-bg: #101523;
+  --color-light-bg: #cbcbcb;
+  --color-light: #e7e7e7;
   --font-geist-mono: "Geist Mono";
   --font-geostar-fill: "Geostar Fill";
   --font-roboto-slab: "Roboto Slab";
   --font-oswald: "Oswald";
   --font-kavoon: "Kavoon";
   --animate-preload-text: preloadText 2s linear infinite;
-  --background-image-loading-text: linear-gradient(90deg, transparent 0% 16.66%, #DC9750 33.33% 50%, transparent 66.66% 75%);
+  --background-image-loading-text: linear-gradient(90deg, transparent 0% 16.66%, #cbcbcb 33.33% 50%, transparent 66.66% 75%);
 }
 
 body {
-  @apply bg-[#cbcbcb] dark:bg-dark-blue bg-[url(noise.webp)] xl:mt-22 max-w-470 mx-auto scroll-smooth transition-all duration-500
+  @apply bg-light-bg dark:bg-dark-bg bg-[url(noise.webp)] xl:mt-22 max-w-470 mx-auto scroll-smooth transition-all duration-500
 }
 
 body.preloading, body.menu-open { @apply overflow-hidden }
@@ -35,6 +36,7 @@ body.preloading, body.menu-open { @apply overflow-hidden }
 .slider-item.active .hero-lang { animation-delay: 2500ms }
 .slider-item.active .hero-vote { animation-delay: 3000ms }
 .cont:hover ul { animation-play-state: paused }
+.themeTransition { @apply transition-colors duration-500}
 
 
 @keyframes preloadText {

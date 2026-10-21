@@ -1,70 +1,86 @@
-import { Link } from "react-router"
-import { CgMenuRight } from "react-icons/cg"
-import { useEffect, useRef, useState } from "react"
-import { MobileMenu } from "../components/header/MobileMenu"
-import { NavLinks } from "../components/header/NavLinks"
+import { Link } from "react-router";
+import { CgClose, CgMenuRight } from "react-icons/cg";
+import { useEffect, useRef, useState } from "react";
+import { NavLinks } from "../components/header/NavLinks";
 
 
-export const Header = ({isDark, onChange}) => {
 
-  const headRef = useRef(null)
-  const lastScrollposRef = useRef(null)
-  const [scroll, setScroll] = useState(false)
-  const [toggleMenu, setToggleMenu] = useState(false)
+export const Header = () => {
+
+  const headRef = useRef(null);
+  const lastScrollposRef = useRef(null);
+  const [scroll, setScroll] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
   
 
-  const hideHeader = () => {
+  function hideHeader() {
     const isScrollbottom = lastScrollposRef.current < window.scrollY;
-
     isScrollbottom 
       ? headRef.current.style.transform = "translateY(-100%)"
-      : headRef.current.style.transform = "translateY(0)"
-
-    lastScrollposRef.current = window.scrollY
-  }
+      : headRef.current.style.transform = "translateY(0)";
+    lastScrollposRef.current = window.scrollY;
+  };
   
   useEffect(() => {
-    const handleScroll = () => {
+    function handleScroll() {
       if (window.scrollY >= 30) {
-        setScroll(true)
-        hideHeader()
+        setScroll(true);
+        hideHeader();
       } 
       else {
-        setScroll(false)
-        headRef.current.style.transform = "translateY(0)"
-        lastScrollposRef.current = window.scrollY
-      }
-    }
+        setScroll(false);
+        headRef.current.style.transform = "translateY(0)";
+        lastScrollposRef.current = window.scrollY;
+      };
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("menu-open", toggleMenu)
-  }, [toggleMenu])
+    document.body.classList.toggle("menu-open", toggleMenu);
+  }, [toggleMenu]);
 
     
   return (
     <>
-      <header ref={headRef}  className={`fixed top-0 left-0 right-0 mx-auto duration-700 transition-all w-full  py-2 md:py-5 lg:py-3 flex max-w-480 z-10 
-      justify-between items-center px-3 ${scroll ? "bg-[#191919] bg-[url(noise.webp)]" : "bg-transparent"}`}>
-
-        <div className="flex-1 lg:justify-start h-13 lg:pl-5 flex items-center">
-          <Link to="/" className={`font-geostar-fill dark:text-[#e7e7e7] text-black text-[26px] tracking-wider md:text-[32px] ${scroll ? "text-white" : "text-black"}`}>Maze Movie</Link>
+      <header 
+        ref={headRef}  
+        className={`fixed top-0 inset-x-0 flex justify-between items-center z-15
+        max-w-480 mx-auto px-4 py-2 md:py-5 lg:py-3 duration-700 transition-all
+        bg-[#191919] bg-[url(noise.webp)] ${scroll ? "" : "xl:bg-transparent bg-none"}`}
+      >
+        <div className="h-13 flex items-center flex-1 lg:justify-start lg:pl-5">
+          <Link 
+            to="/" 
+            className={`font-geostar-fill text-white text-[24px] tracking-wider md:text-[32px]`}
+          >Maze Movie</Link>
         </div>
 
-        <NavLinks isDark={isDark} onChange={onChange} scroll={scroll} />
+        <NavLinks scroll={scroll} type="bigscreen" /> 
 
-        <CgMenuRight onClick={() => setToggleMenu(true)} className="text-[#e7e7e7] text-[33px] md:text-[40px] xl:hidden" />
-
-
+        <CgMenuRight 
+          onClick={() => setToggleMenu(true)} 
+          className="text-light text-[33px] md:text-[40px] xl:hidden" 
+        />
       </header>
 
-      <MobileMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+
+      <div
+        className={`fixed inset-0 flex items-center pt-30 flex-col dark:bg-neutral-900 bg-light-bg bg-[url(noise.webp)] z-50
+        transition-all duration-500 ${toggleMenu ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <CgClose size={40} onClick={() => setToggleMenu(false)} className="absolute top-7 right-7 dark:text-light text-black transition-all duration-500"/>
+
+        <Link to="/" className="text-[34px] dark:text-light transition-all duration-500 text-black font-geostar-fill mb-25 tracking-widest md:text-[40px]">Maze Movie</Link>
+
+        <NavLinks scroll={scroll} type="smallscreen" />
+
+      </div>
     </>
   )
 }

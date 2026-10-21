@@ -1,17 +1,17 @@
 import { useRef } from "react";
 import { BiUser } from "react-icons/bi";
 import { Link, NavLink } from "react-router";
-import ThemeToggle from "../shared/ThemeToggle";
+import { ThemeToggle } from "../shared/ThemeToggle";
 
 
 
-export const NavLinks = ({ isDark, onChange, scroll }) => {
+export const NavLinks = ({ scroll, type }) => {
 
+  const login = useRef(null);
+  const newsNav = useRef(null);
   const homeNav = useRef(null);
   const moviesNav = useRef(null);
   const seriesNav = useRef(null);
-  const newsNav = useRef(null);
-  const login = useRef(null);
   
   const navbar = [
     {id: 1, title: "HOME", to: "/", ref: homeNav, originalText: "HOME"},
@@ -35,10 +35,18 @@ export const NavLinks = ({ isDark, onChange, scroll }) => {
     }, 45);
   }
 
+
   
   return (
-    <div className="hidden xl:flex flex-3 items-center">
-      <nav className={`font-geist-mono uppercase flex-center flex-2 dark:text-[#e7e7e7] text-black gap-15 tracking-wider text-[16px] h-13 ${scroll ? "text-white" : "text-black"}`}>
+    <div className={`
+      ${type === "bigscreen" && "hidden xl:flex flex-3 items-center"}
+      ${type === "smallscreen" && "flex flex-col"}
+    `}>
+      <nav className={`
+        font-geist-mono uppercase dark:text-light text-black transition-all duration-500 tracking-wider text-[16px] 
+        ${type === "bigscreen" && "flex-center flex-2 gap-15 h-13"}
+        ${type === "smallscreen" && "flex flex-col text-center gap-8 text-[17px] mb-17 -mt-9"}
+      `}>
         {navbar.map(item => (
           <NavLink key={item.id} to={item.to} ref={item.ref}
             onMouseOver={() => handleHover(item.ref, item.originalText)}
@@ -48,7 +56,12 @@ export const NavLinks = ({ isDark, onChange, scroll }) => {
         ))}
       </nav>
 
-      <div className={`flex items-center justify-end font-geist-mono uppercase tracking-wider flex-1 transition-colors duration-500 dark:text-[#e7e7e7] text-black lg:justify-end pr-5 ${scroll ? "text-white" : "text-black"} `}>
+      <div className={`
+        font-geist-mono uppercase tracking-wider transition-all duration-500 dark:text-light text-black
+        ${scroll ? "text-light" : "text-black"}   
+        ${type === "bigscreen" && "flex items-center justify-end flex-1 gap-8"}
+        ${type === "smallscreen" && "flex-center flex-col gap-6"}
+      `}>
         <div className="flex-center text-[15px]">
           <BiUser size={18} className="mr-1"/>
           <Link 
@@ -58,8 +71,8 @@ export const NavLinks = ({ isDark, onChange, scroll }) => {
           >LOGIN</Link>
         </div>
 
-        <div className="pl-5">
-          <ThemeToggle scale={0.4} isDark={isDark} onChange={onChange} />
+        <div>
+          <ThemeToggle scale={0.4} />
         </div>
       </div>
     </div>
