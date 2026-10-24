@@ -52,12 +52,12 @@ export const Header = () => {
         ref={headRef}  
         className={`fixed top-0 inset-x-0 flex justify-between items-center z-15
         max-w-480 mx-auto px-4 py-2 md:py-5 lg:py-3 duration-700 transition-all
-        bg-[#191919] bg-[url(noise.webp)] ${scroll ? "" : "xl:bg-transparent bg-none"}`}
+        bg-[url(noise.webp)] ${scroll ? "bg-[#191919]" : "bg-[#191919d1] xl:bg-transparent bg-none"}`}
       >
         <div className="h-13 flex items-center flex-1 lg:justify-start lg:pl-5">
           <Link 
             to="/" 
-            className={`font-geostar-fill text-white text-[24px] tracking-wider md:text-[32px]`}
+            className={`font-geostar-fill dark:text-white  text-[24px] tracking-wider md:text-[32px]`}
           >Maze Movie</Link>
         </div>
 

@@ -1,12 +1,13 @@
-import { Form, useSearchParams } from "react-router"
+import { Form, useNavigate, useSearchParams } from "react-router"
 
 
 export const SeriesFilter = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   return (
-    <Form method="get">
-      <select name="genres" defaultValue={searchParams.get("genres") ?? ""}>
+    <Form method="get" action="/series" className="grid grid-cols-2 gap-2 p-4">
+      <select name="genres" defaultValue={searchParams.get("genres") ?? ""} className="filterSelect">
         <option value="">Genres</option>
         <option value="10759">Action/Adventure‏</option>
         <option value="16">Animation‏</option>
@@ -17,13 +18,13 @@ export const SeriesFilter = () => {
         <option value="10765">‏Science Fiction‏</option>
       </select>
 
-      <select name="sort" defaultValue={searchParams.get("sort")}>
+      <select name="sort" defaultValue={searchParams.get("sort")} className="filterSelect">
         <option value="popularity.desc">‏Most Popular‏</option>
         <option value="first_air_date.desc">Newest‏</option>
         <option value="vote_average.desc">‏Top Rated‏</option>
       </select>
 
-      <select name="year" defaultValue={searchParams.get("year") ?? ""}>
+      <select name="year" defaultValue={searchParams.get("year") ?? ""} className="filterSelect">
         <option value="">Year</option>
         <option value="2026">2026</option>
         <option value="2025">2025</option>
@@ -31,7 +32,7 @@ export const SeriesFilter = () => {
         <option value="2023">2023</option>
       </select>
 
-      <select name="rating" defaultValue={searchParams.get("rating") ?? ""}>
+      <select name="rating" defaultValue={searchParams.get("rating") ?? ""} className="filterSelect">
         <option value="">Rating</option>
         <option value="9">9</option>
         <option value="8">8</option>
@@ -41,7 +42,9 @@ export const SeriesFilter = () => {
         <option value="4">4</option>
       </select>
 
-      <button type="submit">Filter</button>
+      
+      <button type="submit" className="col-span-2 bg-white text-black" onClick={() => navigate("/series")}>Filter</button>
+      
     </Form>
   )
 }

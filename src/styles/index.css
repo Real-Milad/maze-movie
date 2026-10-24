@@ -38,6 +38,10 @@ body.preloading, body.menu-open { @apply overflow-hidden }
 .cont:hover ul { animation-play-state: paused }
 .themeTransition { @apply transition-colors duration-500}
 
+.filterSelect {
+  @apply bg-white border-none rounded-[5px] py-2 outline-none
+}
+
 
 @keyframes preloadText {
   0% {background-position: 100%;}

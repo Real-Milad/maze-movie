@@ -87,7 +87,7 @@ export const HeroSmallScreen = () => {
               </div>
 
               <button 
-                className="slider-reveal hero-lang bg-light py-2 px-9 text-black rounded-[5px] mt-5" 
+                className="slider-reveal hero-lang bg-light py-2 px-9 text-black rounded-[5px] mt-5"
                 onClick={() => navigate(`/movies/${slide.id}`)}
               >More Info</button>
            

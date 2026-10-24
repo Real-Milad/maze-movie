@@ -54,8 +54,8 @@ export const Hero = () => {
 
                 <div className="left flex flex-col flex-1 gap-2">
                   <div className="flex items-center gap-5">
-                    <h2 className="text-[25px] font-bold font-roboto-slab tracking-wider text-neutral-300">{slide.title.split(":")[0]}</h2>
-                    <p className="text-[25px] font-bold font-roboto-slab tracking-wider text-neutral-300">{slide.release_date.split("-")[0]}</p>
+                    <h2 className="text-[18px] 2xl:text-[26px] font-bold font-roboto-slab tracking-wider text-neutral-300">{slide.title.split(":")[0]}</h2>
+                    <p className="text-[18px] 2xl:text-[26px] font-bold font-roboto-slab tracking-wider text-neutral-300">{slide.release_date.split("-")[0]}</p>
                   </div>
 
                   <div className="flex items-center gap-5">
@@ -69,7 +69,7 @@ export const Hero = () => {
                 </div>
 
                 <div className="right flex-1">
-                  <p className="overflow-hidden text-[18px] line-clamp-4 text-white/90 font-oswald tracking-wider">{slide.overview}</p>
+                  <p className="overflow-hidden text-[16px] 2xl:text-[18px] line-clamp-4 text-white/90 font-oswald tracking-wider">{slide.overview}</p>
                 </div>
 
               </div>

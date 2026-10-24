@@ -1,7 +1,7 @@
 import { Hero } from "../components/home/Hero"
 import { InfinitSlider } from "../components/home/InfinitSlider"
 import { HeroSmallScreen } from "../components/home/HeroSmallScreen"
-import { InputSearch } from "../components/shared/InputSearch"
+import { HomeFilter } from "../components/shared/HomeFilter"
 
 
 export const Home = () => {
@@ -9,7 +9,7 @@ export const Home = () => {
     <div>
       <Hero />
       <HeroSmallScreen />
-      <InputSearch />
+      <HomeFilter />
       <InfinitSlider />
     </div>
   )
