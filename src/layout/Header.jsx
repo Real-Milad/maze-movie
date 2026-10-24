@@ -71,12 +71,22 @@ export const Header = () => {
 
 
       <div
-        className={`fixed inset-0 flex items-center pt-30 flex-col dark:bg-neutral-900 bg-light-bg bg-[url(noise.webp)] z-50
-        transition-all duration-500 ${toggleMenu ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-0 flex items-center pt-30 flex-col dark:bg-neutral-900
+        bg-light-bg bg-[url(noise.webp)] z-50 transition-all duration-500 
+        ${toggleMenu ? "translate-x-0" : "-translate-x-full"}`}
       >
-        <CgClose size={40} onClick={() => setToggleMenu(false)} className="absolute top-7 right-7 dark:text-light text-black transition-all duration-500"/>
+        <CgClose 
+          size={40} 
+          onClick={() => setToggleMenu(false)} 
+          className="absolute top-7 right-7 dark:text-light text-black transition-all duration-500"
+        />
 
-        <Link to="/" className="text-[34px] dark:text-light transition-all duration-500 text-black font-geostar-fill mb-25 tracking-widest md:text-[40px]">Maze Movie</Link>
+        <Link 
+          to="/" 
+          className="text-[34px] dark:text-light transition-all duration-500 
+          text-black font-geostar-fill mb-25 tracking-widest md:text-[40px">
+          Maze Movie
+        </Link>
 
         <NavLinks scroll={scroll} type="smallscreen" />
 
