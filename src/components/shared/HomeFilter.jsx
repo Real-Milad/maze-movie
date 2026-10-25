@@ -7,13 +7,15 @@ export const HomeFilter = () => {
   const [filter, setFilter] = useState('movies');
 
   return (
-    <div className="bg-black/30 backdrop-blur-md mx-1 bg-[url(noise.webp)]">
+    <div className="px-2 py-5 font-lato tracking-wide mt-5">
       <InputSearch />
 
-      <select onChange={(e) => setFilter(e.target.value)} className=" filterSelect">
-        <option value="movies">Movies</option>
-        <option value="series">Series</option>
-      </select>
+      <div className="w-full">
+        <select onChange={(e) => setFilter(e.target.value)} className="filterSelect w-full my-2 px-2 appearance-none">
+          <option value="movies">Movies</option>
+          <option value="series">Series</option>
+        </select>
+      </div>
 
       {filter === "movies" ? <MoviesFilter /> : <SeriesFilter />}
     </div>

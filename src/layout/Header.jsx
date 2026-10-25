@@ -57,7 +57,7 @@ export const Header = () => {
         <div className="h-13 flex items-center flex-1 lg:justify-start lg:pl-5">
           <Link 
             to="/" 
-            className={`font-geostar-fill dark:text-white  text-[24px] tracking-wider md:text-[32px]`}
+            className={`font-geostar-fill text-white  text-[24px] tracking-wider md:text-[32px]`}
           >Maze Movie</Link>
         </div>
 

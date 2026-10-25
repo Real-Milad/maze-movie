@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
@@ -15,6 +16,7 @@
   --font-geist-mono: "Geist Mono";
   --font-geostar-fill: "Geostar Fill";
   --font-roboto-slab: "Roboto Slab";
+  --font-lato: "Lato";
   --font-oswald: "Oswald";
   --font-kavoon: "Kavoon";
   --animate-preload-text: preloadText 2s linear infinite;
@@ -39,7 +41,7 @@ body.preloading, body.menu-open { @apply overflow-hidden }
 .themeTransition { @apply transition-colors duration-500}
 
 .filterSelect {
-  @apply bg-white border-none rounded-[5px] py-2 outline-none
+  @apply bg-[#e1e1e1] border-none rounded-[5px] py-2 outline-none px-2
 }
 
 

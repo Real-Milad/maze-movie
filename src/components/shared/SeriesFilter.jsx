@@ -6,7 +6,7 @@ export const SeriesFilter = () => {
   const navigate = useNavigate();
 
   return (
-    <Form method="get" action="/series" className="grid grid-cols-2 gap-2 p-4">
+    <Form method="get" action="/series" className="grid grid-cols-2 gap-2">
       <select name="genres" defaultValue={searchParams.get("genres") ?? ""} className="filterSelect">
         <option value="">Genres</option>
         <option value="10759">Action/Adventure‏</option>
@@ -43,7 +43,7 @@ export const SeriesFilter = () => {
       </select>
 
       
-      <button type="submit" className="col-span-2 bg-white text-black" onClick={() => navigate("/series")}>Filter</button>
+      <button type="submit" className="col-span-2 w-full bg-neutral-600 mt-2 py-2 rounded-[9px] text-white " onClick={() => navigate("/series")}>Filter</button>
       
     </Form>
   )
