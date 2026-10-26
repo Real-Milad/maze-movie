@@ -45,7 +45,7 @@ export const MoviesFilter = () => {
         <option value="4">4</option>
       </select>
 
-      <button type="submit" className="col-span-2 w-full bg-neutral-600 mt-2 py-2 rounded-[9px] text-white ">Filter</button>
+      <button type="submit" className="col-span-2 w-full bg-neutral-600 mt-2 py-2 rounded-[5px] text-white hover:bg-neutral-800 duration-400">Filter</button>
     </Form>
   )
 }

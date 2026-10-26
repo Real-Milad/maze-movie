@@ -3,14 +3,33 @@ import { CgClose, CgMenuRight } from "react-icons/cg";
 import { useEffect, useRef, useState } from "react";
 import { NavLinks } from "../components/header/NavLinks";
 
-
+import logoLight from "../assets/Maze_logo.gif"
+import logoDark from "../assets/Maze_logo_black.gif"
 
 export const Header = () => {
+
+    const logo = useRef(null);
+
 
   const headRef = useRef(null);
   const lastScrollposRef = useRef(null);
   const [scroll, setScroll] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
+
+  function handleHover(element, originalText) {
+    let randomChar = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let iteration = 0;
+  
+    let interval = setInterval(() => {
+      element.current.innerText = originalText.split('').map((char, index) => {
+        if (index < iteration) return char;
+        return randomChar.charAt(Math.floor(Math.random() * randomChar.length));
+      }).join('');
+  
+      if (iteration >= originalText.length) clearInterval(interval);
+      iteration += 1 / 3;
+    }, 45);
+  }
   
 
   function hideHeader() {
@@ -52,13 +71,16 @@ export const Header = () => {
         ref={headRef}  
         className={`fixed top-0 inset-x-0 flex justify-between items-center z-15
         max-w-480 mx-auto px-4 py-2 md:py-5 lg:py-3 duration-700 transition-all
-        bg-[url(noise.webp)] ${scroll ? "bg-[#191919]" : "bg-[#191919d1] xl:bg-transparent bg-none"}`}
+        bg-[url(noise.webp)] ${scroll ? "bg-[#191919]" : "bg-transparent bg-none"}`}
       >
-        <div className="h-13 flex items-center flex-1 lg:justify-start lg:pl-5">
-          <Link 
-            to="/" 
-            className={`font-geostar-fill text-white  text-[24px] tracking-wider md:text-[32px]`}
-          >Maze Movie</Link>
+        <div className="h-13 flex items-center flex-1 lg:justify-start lg:pl-5 gap-3">
+          <img src={logoDark} alt="" className="w-7 xl:w-9 hidden xl:block xl:dark:hidden"/>
+          <img src={logoLight} alt="" className="w-7 xl:w-9 xl:hidden xl:dark:block"/>
+          <Link to="/" className={`font-geostar-fill text-white xl:text-black xl:dark:text-white text-[23px] tracking-wider md:text-[35px] flex-center gap-3`}>
+            Maze Movie
+          </Link>
+
+    
         </div>
 
         <NavLinks scroll={scroll} type="bigscreen" /> 

@@ -43,7 +43,7 @@ export const SeriesFilter = () => {
       </select>
 
       
-      <button type="submit" className="col-span-2 w-full bg-neutral-600 mt-2 py-2 rounded-[9px] text-white " onClick={() => navigate("/series")}>Filter</button>
+      <button type="submit" className="col-span-2 w-full bg-neutral-600 mt-2 py-2 rounded-[5px] text-white hover:bg-neutral-800 duration-400" onClick={() => navigate("/series")}>Filter</button>
       
     </Form>
   )

@@ -42,7 +42,8 @@ export const HeroSmallScreen = () => {
             ${index === i ? "active opacity-100 visible" : "opacity-0 invisible"}`
           }
         >
-          <div className="absolute inset-0 bg-linear-to-t from-black via-black/80 to-transparent"/>
+          <div className="absolute inset-0 bg-linear-to-t from-black via-black/10 to-transparent"/>
+          <div className="absolute inset-0 bg-linear-to-b from-black via-black/50 to-transparent"/>
 
           <div className="size-full absolute top-0 left-0 -z-1 pointer-events-none bg-black"> 
             <img 

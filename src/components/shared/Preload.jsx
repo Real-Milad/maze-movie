@@ -1,5 +1,6 @@
 import { DNA } from "react-loader-spinner";
 import { useEffect, useState } from "react";
+import logoLight from "../../assets/Maze_logo.gif"
 
 
 
@@ -24,8 +25,9 @@ export const Preload = () => {
       fixed inset-0 flex-center flex-col bg-dark-bg bg-[url(noise.webp)]
       duration-900 delay-500 z-99 ${load && "translate-y-full"}`}>
 
-      <div className={`duration-250 ${load && "opacity-0"}`}>
-        <DNA height="150" width="150" dnaColorOne="#cbcbcb" dnaColorTwo="#cbcbcb" />
+      <div className={`duration-250 mb-10 ${load && "opacity-0"}`}>
+        <img src={logoLight} alt="" className="w-30 xl:w-40"/>
+        {/* <DNA height="150" width="150" dnaColorOne="#cbcbcb" dnaColorTwo="#cbcbcb" /> */}
       </div>
 
       <div className="w-full h-max">
