@@ -4,9 +4,7 @@ import { Link, NavLink } from "react-router";
 import { ThemeToggle } from "../shared/ThemeToggle";
 
 
-
 export const NavLinks = ({ scroll, type }) => {
-
   const login = useRef(null);
   const newsNav = useRef(null);
   const homeNav = useRef(null);
@@ -36,7 +34,6 @@ export const NavLinks = ({ scroll, type }) => {
   }
 
 
-  
   return (
     <div className={`
       ${type === "bigscreen" && "hidden xl:flex flex-3 items-center"}
@@ -48,7 +45,7 @@ export const NavLinks = ({ scroll, type }) => {
         ${type === "smallscreen" && "flex flex-col text-center gap-8 text-[17px] mb-17 -mt-9"}
       `}>
         {navbar.map(item => (
-          <NavLink key={item.id} to={item.to} ref={item.ref}
+          <NavLink key={item.id} to={item.to} ref={item.ref} className={`${scroll ? "text-white" : ""}`}
             onMouseOver={() => handleHover(item.ref, item.originalText)}
             onMouseOut={() => handleHover(item.ref, item.originalText)}>
             {item.title}

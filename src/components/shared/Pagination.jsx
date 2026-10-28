@@ -1,8 +1,8 @@
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
-function getVisiblePages(currentPage, totalPage) {
 
+function getVisiblePages(currentPage, totalPage) {
   if (totalPage <= 7) {
     const pageArray = []
     for (let i = 1; i <= totalPage; i++) {
@@ -24,27 +24,26 @@ function getVisiblePages(currentPage, totalPage) {
 
 
 export const Pagination = ({ page, setPage, totalPage }) => {
-
   const visiblePages = getVisiblePages(page, totalPage)
   
   return (
-    <div className="max-w-max my-10 mx-auto w-full px-3">
+    <div className="max-w-max my-10 mx-auto w-full px-1 py-1 bg-[#9f9f9f] rounded-full flex-center">
 
       <button 
         disabled={page === 1} 
         onClick={() => setPage(page - 1)}
-        className="rounded-lg bg-[#14677c] p-2 text-neutral-200 
-        text-[14px] font-bold font-sans hover:bg-[#14677c] disabled:opacity-50"
+        className="rounded-full bg-[#d3d3d3] py-2 px-4 text-neutral-900 
+        text-[15px] font-sans hover:bg-neutral-200 disabled:opacity-50"
       ><IoIosArrowBack /></button>
 
-      <div className="inline-flex gap-2 px-4">
+      <div className="inline-flex gap-0.5 mx-3">
         {visiblePages.map((p, i) => 
           <button 
             key={i} 
             onClick={() => p !== "..." && setPage(p) } 
-            className={`text-neutral-400 font-bold
-              ${page === p && "text-white bg-[#14677c]"} 
-              ${p !== "..." && "border border-[#14677c] rounded-lg py-0.5 px-2"} 
+            className={`text-neutral-800 font-semibold px-2
+              ${page === p && "text-black bg-[#d3d3d3] px-3"} 
+              ${p !== "..." && " rounded-full py-1"} 
             `}
           >{p}</button>
         )}
@@ -53,8 +52,8 @@ export const Pagination = ({ page, setPage, totalPage }) => {
       <button 
         disabled={page === totalPage} 
         onClick={() => setPage(page + 1)}
-        className="rounded-lg bg-[#14677c] p-2 text-neutral-700 
-        text-[14px] font-bold font-sans hover:bg-[#14677c] disabled:opacity-50"
+        className="rounded-full bg-[#d3d3d3] py-2 px-4 text-neutral-900 
+        text-[15px] font-sans hover:bg-neutral-200 disabled:opacity-50"
       ><IoIosArrowForward /></button>
 
     </div>

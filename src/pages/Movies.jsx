@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Pagination } from "../components/shared/Pagination";
 import { MoviesFilter } from "../components/shared/MoviesFilter";
 import { useSearchParams } from "react-router";
+import { HomeFilter } from "../components/shared/HomeFilter";
 
 
 export const Movies = () => {
@@ -25,8 +26,7 @@ export const Movies = () => {
 
   const [activeId, setActiveId] = useState(false);
   const { data, isPending, isError } = useQuery(queryOptionMovies(sort, year, genres, rating, page));
-  const totalPage = data?.total_pages;
-  console.log(totalPage)
+  const totalPage = 100;
 
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const Movies = () => {
 
   return (
     <>
-      <MoviesFilter />
+      <HomeFilter />
       
       <div className="mt-15 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 

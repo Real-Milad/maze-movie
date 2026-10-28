@@ -13,13 +13,13 @@ import { createBrowserRouter } from "react-router";
 export const router = createBrowserRouter([
   {path: "/" , Component: RootLayout,
     children: [
-      {path: "*", Component: PageNotFound},
       {index: true, Component: Home},
       {path: "movies", Component: Movies},
       {path: "movies/:id", Component: MoviesDetails},
       {path: "series", Component: Series},
       {path: "series/:id", Component: SeriesDetails},
       {path: "search", Component: Search },
+      {path: "*", Component: PageNotFound},
     ]
   }
 ])

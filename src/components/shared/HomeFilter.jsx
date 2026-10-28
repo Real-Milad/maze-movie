@@ -7,7 +7,7 @@ export const HomeFilter = () => {
   const [filter, setFilter] = useState('movies');
 
   return (
-    <div className="px-2 py-5 font-lato tracking-wide mt-3">
+    <div className="px-2 py-5 font-lato tracking-wide mt-3 xl:mt-10 md:mt-30 md:mx-19">
       <InputSearch />
 
       <div className="w-full">
