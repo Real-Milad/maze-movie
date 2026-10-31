@@ -3,7 +3,6 @@ import { queryOptionMovies } from "../api/queryMovies"
 import { MovieCard } from "../components/shared/MovieCard";
 import { useEffect, useState } from "react";
 import { Pagination } from "../components/shared/Pagination";
-import { MoviesFilter } from "../components/shared/MoviesFilter";
 import { useSearchParams } from "react-router";
 import { HomeFilter } from "../components/shared/HomeFilter";
 

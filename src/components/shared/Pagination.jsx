@@ -27,7 +27,7 @@ export const Pagination = ({ page, setPage, totalPage }) => {
   const visiblePages = getVisiblePages(page, totalPage)
   
   return (
-    <div className="max-w-max my-10 mx-auto w-full px-1 py-1 bg-[#9f9f9f] rounded-full flex-center">
+    <div className="max-w-max my-10 mx-auto w-full px-1 py-1 bg-[#9f9f9f] rounded-full flex-center md:gap-5 ">
 
       <button 
         disabled={page === 1} 
@@ -41,7 +41,7 @@ export const Pagination = ({ page, setPage, totalPage }) => {
           <button 
             key={i} 
             onClick={() => p !== "..." && setPage(p) } 
-            className={`text-neutral-800 font-semibold px-2
+            className={`text-neutral-800 font-semibold px-2 md:px-4
               ${page === p && "text-black bg-[#d3d3d3] px-3"} 
               ${p !== "..." && " rounded-full py-1"} 
             `}
