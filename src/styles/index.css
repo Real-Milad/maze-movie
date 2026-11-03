@@ -31,7 +31,7 @@ body.preloading, body.menu-open { @apply overflow-hidden }
 .flex-center { @apply flex items-center justify-center }
 .slider-reveal { @apply opacity-0 }
 .slider-item.active .slider-reveal { animation: sliderReveal 1s ease forwards }
-.slider-item.active .count { animation-delay: 500ms }
+/* .slider-item.active .count { animation-delay: 500ms } */
 .slider-item.active .hero-banner { animation-delay: 1000ms }
 .slider-item.active .hero-title { animation-delay: 1500ms }
 .slider-item.active .hero-date { animation-delay: 2000ms }

@@ -28,7 +28,6 @@ export const HeroSmallScreen = () => {
     return () => clearInterval(interval);
   }, [index]);
 
-  console.log(slides)
 
 
   return (

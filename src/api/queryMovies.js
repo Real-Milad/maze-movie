@@ -8,8 +8,21 @@ async function fetchMovies(sort, year, genres, rating, page) {
   const yearQuery = year ? `&primary_release_year=${year}` : "";
   const ratingQuery = rating ? `&vote_average.gte=${rating}` : "";
 
-  const response = await fetch(`${BASE_URL}?sort_by=${sort}&page=${page}${genreQuery}${yearQuery}${ratingQuery}&api_key=${API_KEY}`);
+  const today = new Date();
+  const endDate = today.toISOString().split("T")[0];
+
+  const start = new Date();
+  start.setMonth(start.getMonth() - 6);
+  const startDate = start.toISOString().split("T")[0];
+
+  const dateQuery =`&primary_release_date.gte=${startDate}` + `&primary_release_date.lte=${endDate}`;
+
+  const response = await fetch(`
+    ${BASE_URL}?sort_by=${sort}&page=${page}${genreQuery}${yearQuery}${ratingQuery}${dateQuery}&api_key=${API_KEY}
+  `);
+
   if (!response.ok) throw new Error("Faild to fetch movies");
+
   return response.json();
 };
 
