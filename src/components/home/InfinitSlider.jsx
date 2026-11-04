@@ -4,7 +4,7 @@ import { FaLanguage } from "react-icons/fa"
 import { PiStarFill } from "react-icons/pi"
 import { MdDateRange } from "react-icons/md"
 
-const SPEED = 50
+const SPEED = 60
 const DRAG_THRESHOLD = 5 // px
 
 export const InfinitSlider = ({ items = [], direction = "rtl", className = "" }) => {
@@ -71,7 +71,7 @@ export const InfinitSlider = ({ items = [], direction = "rtl", className = "" })
 
   return (
     <div
-      className={`cont w-[98%] max-w-[1900px] h-87.5 mx-auto overflow-hidden select-none
+      className={`w-[98%] max-w-[1900px] mx-auto overflow-hidden select-none mb-10 mt-3
         cursor-grab active:cursor-grabbing touch-pan-y mask-x-from-97% mask-x-to-98% ${className}`}
       onPointerEnter={() => (s.current.hovered = true)}
       onPointerLeave={() => (s.current.hovered = false)}
@@ -80,23 +80,23 @@ export const InfinitSlider = ({ items = [], direction = "rtl", className = "" })
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
     >
-      <div ref={trackRef} className="flex gap-4 xl:gap-10 will-change-transform h-full items-center">
+      <div ref={trackRef} className="flex gap-5 will-change-transform h-full items-center">
         {[0, 1].map((copy) => (
           <ul
             key={copy}
             ref={copy === 0 ? firstListRef : null}
-            className="min-w-full flex shrink-0 justify-between items-center gap-4"
+            className="min-w-full flex shrink-0 justify-between items-center gap-5"
           >
             {items.map((item) => (
               <li
                 key={`${copy}-${item.id}`}
-                className="group relative w-40 h-60 lg:w-50 lg:h-75 shrink-0 rounded-2xl overflow-hidden"
+                className="group relative w-40 h-60 lg:w-50 lg:h-75 shrink-0 rounded-[9px] overflow-hidden"
               >
                 <img
                   src={item.img}
                   alt={item.title}
                   draggable={false}
-                  className="w-full h-full object-cover duration-500 grayscale-100 group-hover:grayscale-0"
+                  className="w-full h-full object-cover duration-500"
                 />
 
                 <div className="absolute inset-0 bg-white/10 backdrop-blur-md opacity-0
