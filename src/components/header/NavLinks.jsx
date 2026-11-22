@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router";
 import { ThemeToggle } from "../shared/ThemeToggle";
 
 
-export const NavLinks = ({ scroll, type }) => {
+export const NavLinks = ({ scroll, type, setToggleMenu }) => {
   const login = useRef(null);
   const newsNav = useRef(null);
   const homeNav = useRef(null);
@@ -47,7 +47,9 @@ export const NavLinks = ({ scroll, type }) => {
         {navbar.map(item => (
           <NavLink key={item.id} to={item.to} ref={item.ref} className={`${scroll ? "text-white" : ""}`}
             onMouseOver={() => handleHover(item.ref, item.originalText)}
-            onMouseOut={() => handleHover(item.ref, item.originalText)}>
+            onMouseOut={() => handleHover(item.ref, item.originalText)}
+            onClick={() => {type === "smallscreen" && setToggleMenu(false)}}
+          >
             {item.title}
           </NavLink>
         ))}

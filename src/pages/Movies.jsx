@@ -25,8 +25,10 @@ export const Movies = () => {
 
   const [activeId, setActiveId] = useState(false);
   const { data, isPending, isError } = useQuery(queryOptionMovies(sort, year, genres, rating, page));
-  const totalPage = 100;
+  const totalPage = data?.total_pages > 100 ? 100 : data?.total_pages;
 
+
+  console.log(data?.total_pages);
 
   useEffect(() => {
     window.scrollTo(0,0);

@@ -6,7 +6,7 @@ export const SeriesFilter = () => {
   const navigate = useNavigate();
 
   return (
-    <Form method="get" action="/series" className="grid grid-cols-2 gap-2">
+    <Form method="get" action="/series" className="grid grid-cols-2 gap-2 mt-20">
       <select name="genres" defaultValue={searchParams.get("genres") ?? ""} className="filterSelect">
         <option value="">Genres</option>
         <option value="10759">Action/Adventure‏</option>

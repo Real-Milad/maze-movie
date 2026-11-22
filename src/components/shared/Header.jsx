@@ -97,7 +97,7 @@ export const Header = () => {
           text-black font-geostar-fill mb-25 tracking-widest md:text-[40px"
         >Maze Movie</Link>
 
-        <NavLinks scroll={scroll} type="smallscreen" />
+        <NavLinks scroll={scroll} setToggleMenu={setToggleMenu} type="smallscreen" />
       </div>
     </>
   )
