@@ -8,7 +8,7 @@ export const MediaRow = ({ title, category, mode, direction }) => {
 
   return (
     <section>
-      <h2 className="font-roboto-slab text-[18px] bg-neutral-400 dark:bg-neutral-600 rounded-[5px] mx-3 h-10 text-center flex-center text-white tracking-wider">{title}</h2>
+      <h2 className="font-roboto-slab text-[22px] bg-neutral-400 dark:bg-neutral-600/50 rounded-[5px] mx-13 h-15 text-center flex-center text-white tracking-wider mt-30">{title}</h2>
       <InfinitSlider 
         items={data} 
         direction={direction} 

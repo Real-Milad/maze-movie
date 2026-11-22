@@ -55,12 +55,12 @@ export const HeroSmallScreen = () => {
           </div>
 
           <div className="absolute slider-reveal count inset-0 flex-center gap-5 
-          flex-col bg-[url(noise.webp)] text-neutral-300 font-roboto-slab">
+          flex-col bg-[url(noise.webp)] text-neutral-300 font-roboto-slab mt-15">
 
             <img 
               src={`${IMAGE_URL}${slide.poster_path}`} 
               alt={slide.title} 
-              className={`slider-reveal hero-banner object-cover border-2 rounded-[7px] w-40 h-60 transition-all border-neutral-300/50 duration-900`}
+              className={`slider-reveal hero-banner object-cover border-2 rounded-[7px] w-40 h-60 md:w-60 md:h-80 transition-all border-neutral-300/50 duration-900`}
             />
 
             <div className="flex-center flex-col gap-7 w-full">
@@ -68,26 +68,26 @@ export const HeroSmallScreen = () => {
                 {slide.title}
               </p>
 
-              <div className="flex justify-center items-start gap-4 slider-reveal hero-date">
+              <div className="flex justify-center items-start gap-4 md:gap-15 slider-reveal hero-date md:text-2xl">
                 <p className="flex items-center gap-2 ">
-                  <MdDateRange size={25} />
+                  <MdDateRange size={25} className="" />
                   {slide.release_date.split("-")[0]}
                 </p>
 
                 <p className="flex items-center gap-2 tracking-widest">
-                  <FaImdb size={25} /> 
+                  <FaImdb size={25} className="" /> 
                   {slide.vote_average.toFixed(1)}
                 </p>
 
                 <p className="flex items-center gap-2 tracking-widest">
-                  <LiaLanguageSolid size={25} /> 
+                  <LiaLanguageSolid size={25} className="" /> 
                   {slide.original_language.toUpperCase()}
                 </p>
                 
               </div>
 
               <button 
-                className="slider-reveal hero-lang bg-light py-2 px-9 text-black rounded-[5px] mt-5"
+                className="slider-reveal hero-lang bg-light py-2 px-9 md:py-3 md:px-12 md:text-[20px] text-black rounded-[5px] mt-5"
                 onClick={() => navigate(`/movies/${slide.id}`)}
               >More Info</button>
            

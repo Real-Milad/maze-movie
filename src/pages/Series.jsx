@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { Pagination } from "../components/shared/Pagination";
 import { queryOptionSeries } from "../api/querySeries";
 import { useSearchParams } from "react-router";
-import { SeriesFilter } from "../components/shared/SeriesFilter";
 import { HomeFilter } from "../components/shared/HomeFilter";
 
 
@@ -43,7 +42,9 @@ export const Series = () => {
   return (
     <>
 
-      <HomeFilter />
+      <div className="w-[87%] mx-auto">
+        <HomeFilter />
+      </div>
       
       <div className="mt-15 min-h-dvh grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 

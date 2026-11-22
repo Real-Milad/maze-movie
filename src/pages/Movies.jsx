@@ -41,7 +41,9 @@ export const Movies = () => {
 
   return (
     <>
-      <HomeFilter />
+      <div className="md:w-[87%] w-full mx-auto">
+        <HomeFilter />
+      </div>
       
       <div className="mt-15 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.map(movie => 

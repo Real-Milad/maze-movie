@@ -11,7 +11,9 @@ export const Home = () => {
     <div>
       <Hero />
       <HeroSmallScreen />
-      <HomeFilter />
+      <div className="mx-auto w-[93%] mt-30">
+        <HomeFilter />
+      </div>
       <MediaRow title="Latest Movies"    category="movie"     mode="latest"  direction="rtl" />
       <MediaRow title="Popular Series"   category="series"    mode="popular" direction="ltr" />
       <MediaRow title="Popular Animation" category="animation" mode="popular" direction="rtl" />

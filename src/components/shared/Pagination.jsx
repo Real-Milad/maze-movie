@@ -42,7 +42,7 @@ export const Pagination = ({ page, setPage, totalPage }) => {
             key={i} 
             onClick={() => p !== "..." && setPage(p) } 
             className={`text-neutral-800 font-semibold px-2 md:px-4
-              ${page === p && "text-black bg-[#d3d3d3] px-3"} 
+              ${page === p && "text-black bg-[#d3d3d3] px-2"} 
               ${p !== "..." && " rounded-full py-1"} 
             `}
           >{p}</button>
