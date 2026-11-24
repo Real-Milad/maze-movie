@@ -41,7 +41,7 @@ body.preloading, body.menu-open { @apply overflow-hidden }
 .themeTransition { @apply transition-colors duration-500}
 
 .filterSelect {
-  @apply bg-[#e1e1e1] border-none rounded-[5px] py-2 outline-none px-2 md:w-40 md:h-11
+  @apply bg-[#e1e1e1] border-none rounded-[5px] py-2 outline-none px-2 xl:w-40 md:h-11
 }
 
 

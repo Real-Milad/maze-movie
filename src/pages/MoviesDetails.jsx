@@ -19,7 +19,7 @@ export const MoviesDetails = () => {
 
 
   return (
-    <div className="w-full h-max mt-50 relative ">
+    <div className="w-full h-max mt-20 relative ">
 
       <img 
         src={`${IMAGE_URL}${data.backdrop_path}`} 

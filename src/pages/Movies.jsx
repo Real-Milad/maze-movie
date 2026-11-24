@@ -41,7 +41,7 @@ export const Movies = () => {
 
   return (
     <>
-      <div className="md:w-[87%] w-full mx-auto">
+      <div className="w-[95%] md:w-[81%] xl:w-[87%] mx-auto mt-26 md:mt-35 xl:mt-40">
         <HomeFilter />
       </div>
       

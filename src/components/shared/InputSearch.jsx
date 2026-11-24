@@ -4,7 +4,7 @@ import { Form } from "react-router"
 export const InputSearch = () => {
 
   return (
-    <div className="w-full mx-auto text-white rounded-[9px] mb-5 md:mb-0 md:w-150 md:mx-0 mr-5">
+    <div className="w-full xl:w-[40%] mx-auto text-white rounded-[9px] mb-5 md:mb-5 xl:mb-0 md:w-full md:mx-0 mr-5">
 
       <Form method="get" action="/search" className="w-full flex-center">
 

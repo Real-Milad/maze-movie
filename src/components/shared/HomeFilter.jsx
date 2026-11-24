@@ -7,10 +7,15 @@ export const HomeFilter = () => {
   const [filter, setFilter] = useState('movies');
 
   return (
-    <div className="px-3 py-5 font-lato tracking-wide mt-25 mb-10  xl:mt-10 xl:w-full mx-auto xl:mx-auto xl:flex xl:justify-center xl:items-center gap-2 bg-neutral-600/50 rounded-2xl">
+    <div className="
+      px-3 py-5 font-lato tracking-wide bg-neutral-600/40 mx-auto gap-2 rounded-2xl mb-10
+      md:mt-5   
+      xl:mt-10 xl:w-full xl:mx-auto xl:flex xl:justify-center xl:items-center 
+    ">
+
       <InputSearch />
 
-      <div className="xl:w-40 w-full xl:ml-6">
+      <div className="2xl:w-40 w-full xl:w-full xl:ml-6">
         <select onChange={(e) => setFilter(e.target.value)} className="filterSelect w-full my-2 px-2 appearance-none">
           <option value="movies">Movies</option>
           <option value="series">Series</option>

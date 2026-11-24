@@ -30,7 +30,10 @@ export const Search = () => {
 
   return (
     <div>
-      <HomeFilter />
+      <div className="w-[95%] md:w-[81%] xl:w-[87%] mx-auto mt-26 md:mt-35 xl:mt-40">
+        <HomeFilter />
+      </div>
+      
       <div className="mt-15 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 xl:gap-10 mx-3 md:mx-20 xl:mx-30 relative">
         {data.results.filter(item => item.media_type !== "person").map(movie => (
           <MovieCard 

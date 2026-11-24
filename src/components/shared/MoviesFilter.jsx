@@ -7,7 +7,7 @@ export const MoviesFilter = () => {
   const [searchParams] = useSearchParams();
 
   return (
-    <Form method="get" action="/movies" className="grid grid-cols-2 gap-2 md:flex md:justify-center md:items-center">
+    <Form method="get" action="/movies" className="grid grid-cols-2 gap-2 xl:flex xl:justify-center xl:items-center">
 
       <select name="genres" defaultValue={searchParams.get("genres") ?? ""} className="filterSelect">
         <option value="">Genres</option>
@@ -45,7 +45,7 @@ export const MoviesFilter = () => {
         <option value="4">4</option>
       </select>
 
-      <button type="submit" className="col-span-2 w-full md:w-40 md:h-11 bg-neutral-600 mt-2 md:mt-0 py-2 rounded-[5px] text-white hover:bg-neutral-800 duration-400">Filter</button>
+      <button type="submit" className="col-span-2 w-full xl:w-40 md:h-11 bg-neutral-600 mt-2 md:mt-0 py-2 rounded-[5px] text-white hover:bg-neutral-800 duration-400">Filter</button>
     </Form>
   )
 }
